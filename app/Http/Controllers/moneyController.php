@@ -17,7 +17,7 @@ class moneyController extends Controller
         $pseudo = $participant[0]->pseudo;
 
         $money = Money::query()
-            ->where('pseudo', '=', $pseudo)
+            ->where('id_pseudo', '=', $idParticipant)
             ->orderBy('id', 'desc')
             ->get();
 
@@ -35,6 +35,7 @@ class moneyController extends Controller
 
         $action = new Money();
         $action->pseudo = $pseudo;
+        $action->id_pseudo = $idParticipant;
         $action->amount = number_format($amount, 2);
         $action->credit = number_format($credit, 2);
         $action->save();
@@ -52,7 +53,7 @@ class moneyController extends Controller
         $pseudo = $participant[0]->pseudo;
 
         $money = Money::query()
-            ->where('pseudo', '=', $pseudo)
+            ->where('id_pseudo', '=', $idParticipant)
             ->orderBy('id', 'desc')
             ->get();
 
@@ -69,6 +70,7 @@ class moneyController extends Controller
 
         $action = new Money();
         $action->pseudo = $pseudo;
+        $action->id_pseudo = $idParticipant;
         $action->amount = number_format($amount, 2);
         $action->debit = number_format($debit, 2);
         $action->save();

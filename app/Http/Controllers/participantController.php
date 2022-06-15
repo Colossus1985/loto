@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Money;
 use App\Models\Participants;
+use Egulias\EmailValidator\Parser\PartParser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,11 +27,18 @@ class participantController extends Controller
         $participant->tel = $request->inputTel;
         $participant->save();
 
+        $pseudo = $request->inputPseudo;
+
+        $participant = Participants::query()
+            ->where('pseudo', '=', $pseudo)
+            ->get();
+        
+        $id_pseudo = $participant[0]->id;
+
         $money = new Money();
         $money->pseudo = $request->inputPseudo;
+        $money->id_pseudo = $id_pseudo;
         $money->save();
-
-        $pseudo = $request->inputPseudo;
 
         return redirect()->back()
             ->with('success', $pseudo.' fait parti de ton groupe!');
@@ -75,9 +83,9 @@ class participantController extends Controller
             ->get();
 
         // dd($participant[0]->totalAmount);
-        $pseudo = $participant[0]->pseudo;
+        $id_pseudo = $participant[0]->id;
         $money = Money::query()
-            ->where('pseudo', '=', $pseudo)
+            ->where('id_pseudo', '=', $id_pseudo)
             ->orderBy('id', 'desc')
             ->get();
 

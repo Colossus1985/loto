@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('money', function (Blueprint $table) {
         $table->id();
         $table->string('pseudo');
+        $table->bigInteger('id_pseudo');
         $table->float('amount')->default(0.00);
         $table->float('credit')->default(0.00);
         $table->float('debit')->default(0.00);
