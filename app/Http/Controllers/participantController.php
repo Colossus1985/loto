@@ -52,10 +52,20 @@ class participantController extends Controller
             ->with('success', $participant[0]->pseudo.' a été supprimé avec succès!');
     }
 
-    public function updateParticipant(Request $request)
+    public function updateParticipant(Request $request, $idParticipant)
     {
+        $pseudo = $request->inputPseudo;
+        
+        $participant = Participants::find($idParticipant);
+        $participant->firstName = $request->inputFirstName;
+        $participant->lastName = $request->inputLastName;
+        $participant->pseudo = $request->inputPseudo;
+        $participant->email = $request->inputEmail;
+        $participant->tel = $request->inputTel;
+        $participant->save();
+
         return redirect()->back()
-            ->with('success', 'mis(e) à jour!');
+            ->with('success', $pseudo.' mis(e) à jour!');
     }
     
     public function participant($idParticipant)

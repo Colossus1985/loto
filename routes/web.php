@@ -18,7 +18,7 @@ Route::get('', [participantController::class, 'home'])->name('home');
 Route::get('participant/{idParticipant}', [participantController::class, 'participant'])->name('participant');
 Route::post('addParticipant', [participantController::class, 'addParticipant'])->name('addParticipant');
 Route::delete('participantDelete/{idParticipant}', [participantController::class, 'participantDelete'])->name('participantDelete');
-Route::post('updateParticipant', [participantController::class, 'updateParticipant'])->name('updateParticipant');
+Route::post('updateParticipant/{idParticipant}', [participantController::class, 'updateParticipant'])->name('updateParticipant');
 Route::get('searchParticipant', [participantController::class, 'searchParticipant'])->name('searchParticipant');
 
 Route::post('addMoney/{idParticipant}', [moneyController::class, 'addMoney'])->name('addMoney');
