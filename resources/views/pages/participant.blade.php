@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('content')
 <div class="mx-5 fw-bold">
-    <form method="POST" action="{{ route('updateParticipant') }}">
+    <form method="POST" action="{{ route('updateParticipant', $participant[0]->id) }}">
         @csrf
         <div class="d-flex flex-row">
             <div class="form-group form-floating mb-3 me-3 d-flex flex-fill">
@@ -30,7 +30,7 @@
                 <label for="floatingTel" class="text-nowrap">Phone</label>
             </div>
             <div class="form-group form-floating mb-3 d-flex flex-fill">
-                <input id="floatingAge" type="email" class="form-control flex-fill fw-bold" name="inputAge"
+                <input id="floatingAge" type="email" class="form-control flex-fill fw-bold" name="inputEmail"
                     value="{{ $participant[0]->email }}">
                 <label for="floatingAge" class="text-nowrap">Email</label>
             </div>
@@ -38,13 +38,13 @@
 
         <div class="d-flex flex-row">
             <div class="form-group form-floating mb-3 me-3">
-                <input id="floatingAmount" type="email" class="form-control text-end fw-bold" name="inputEmail"
+                <input id="floatingAmount" class="form-control text-end fw-bold"
                     value="{{ $participant[0]->amount }} €" readonly>
                 <label for="floatingAmount" class="text-nowrap">Disponible</label>
             </div>
 
             <div class="form-group form-floating mb-3 me-3">
-                <input id="floatingAmount" type="email" class="form-control text-end fw-bold" name="inputEmail"
+                <input id="floatingAmount" class="form-control text-end fw-bold"
                     value="{{ $participant[0]->totalAmount }} €" readonly>
                 <label for="floatingAmount" class="text-nowrap">Joué</label>
             </div>
