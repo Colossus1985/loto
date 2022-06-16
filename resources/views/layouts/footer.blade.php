@@ -7,7 +7,7 @@
                 style="padding-bottom: 15px; font-size: 25px;"></i>MyLotoGroupe</a>
             <a class="text-decoration-none" target="blank"
                 href="https://www.linkedin.com/in/steve-greiner-040341235/"><i
-                class="fa-brands fa-linkedin img me-2"></i>Steve Greiner pour Florence Boyer</a>
+                class="fa-brands fa-linkedin img me-2"></i>Steve Greiner pour Florence Rosély Boyer</a>
         </div>
         <!-- ######## HELPER SITE ########### -->
         <div class="m-3">
