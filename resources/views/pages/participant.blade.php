@@ -55,97 +55,6 @@
         </div>
     </form>
 
-    <div class="d-flex flex-row justify-content-between mb-3">
-        <form method="POST" action="{{ route('addMoney', $participant[0]->id) }}">
-            @csrf
-            <div class="d-flex flex-row">
-                <div class="form-group form-floating d-flex me-3">
-                    <input
-                        type=text
-                        id="floatingCredit"
-                        class="form-control bg-success"
-                        readonly
-                    />
-                    <label class="text-center text-nowrap fw-bold fs-3" for="floatingCredit">Credit :</label>
-                </div>
-                <div class="form-group form-floating d-flex me-3">
-                    <input
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        class="form-control flex-fill"
-                        name="inputMontant"
-                        id="floatingMontant"
-                        value="{{ old('inputMontant') }}"
-                        placeholder="+💲"
-                    />
-                    <label for="floatingMontant"><strong>+</strong>💲</label>
-                </div>
-
-                <div class="d-flex">
-                    <button
-                        class="btn btn-primary"
-                        type="submit"
-                        onclick="return confirm('Ajouter les fonds pour {{ $participant[0]->pseudo }} ?');"
-                    >
-                    ✔️
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="d-flex flex-row justify-content-between mb-3">
-        <form method="POST" action="{{ route('retriveMoney', $participant[0]->id) }}">
-            @csrf
-            <div class="d-flex flex-row">
-                <div class="form-group form-floating d-flex me-3">
-                    <input
-                        type=text
-                        id="floatingDebit"
-                        class="form-control bg-success"
-                        readonly
-                    />
-                    <label class="text-center text-nowrap fw-bold fs-3" for="floatingDebit">Debit :</label>
-                </div>
-                <div class="form-group form-floating d-flex me-3">
-                    <input
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        class="form-control flex-fill"
-                        name="inputMontant"
-                        id="floatingMontant"
-                        value="{{ old('inputMontant') }}"
-                        placeholder="-💲"
-                    />
-                    <label for="floatingMontant"><strong>-</strong>💲</label>
-                </div>
-
-                <div class="d-flex">
-                    <button
-                        class="btn btn-primary"
-                        type="submit"
-                        onclick="return confirm('Retirer les fonds pour {{ $participant[0]->pseudo }} ?');"
-                    >
-                    ✔️
-                    </button>
-                </div>
-            </div>
-        </form>
-
-        <form action="{{ route('participantDelete', $participant[0]->id) }}" method="Post">
-            @csrf
-            @method('DELETE')
-            <div class="">
-                <button type="submit" class="btn btn-danger"
-                    onclick="return confirm('Veux tu vraiment supprimer {{ $participant[0]->pseudo }} ?');">Delete
-                </button>
-            </div>
-        </form>
-    </div>
-    
-
     <table class="table table-bordered my-4">
         <tr class="bg-light">
             <th>Montant</th>
@@ -172,6 +81,16 @@
             </tr>
         @endforeach
     </table>
+
+    <form action="{{ route('participantDelete', $participant[0]->id) }}" method="Post">
+        @csrf
+        @method('DELETE')
+        <div class="">
+            <button type="submit" class="btn btn-danger"
+                onclick="return confirm('Veux tu vraiment supprimer {{ $participant[0]->pseudo }} ?');">Supprimer {{$participant[0]->pseudo}}
+            </button>
+        </div>
+    </form>
 </div>
 
 @endsection
