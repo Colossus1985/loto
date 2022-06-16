@@ -14,7 +14,14 @@ class participantController extends Controller
     {
         $participants = Participants::query()
             ->get();
-        return view('pages.main', ['participants' => $participants]);
+        $fonds = 0;
+        if (count($participants) != 0) {
+            for ($i = 0;  $i < count($participants) ; $i++) {
+                $fonds = $fonds + $participants[$i]->amount;
+            }
+        }
+        // dd($fonds);
+        return view('pages.main', ['participants' => $participants, 'fonds' => $fonds]);
     }
 
     public function addParticipant(Request $request)

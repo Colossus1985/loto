@@ -44,7 +44,7 @@ class moneyController extends Controller
             ->with('success', $credit.'€ ajouté sur le compte de '. $pseudo);
     }
 
-    public function retriveMoney(Request $request, $idParticipant)
+    public function debitMoney(Request $request, $idParticipant)
     {
         $participant = Participants::query()
             ->where('id', '=', $idParticipant)

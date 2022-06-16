@@ -1,13 +1,14 @@
-<div class="modal fade" id="modalAddMoney{{$participant->id}}" tabindex="-1" aria-labelledby="{{$participant->id}}" aria-hidden="true">
+<div class="modal fade" id="modalDebitMoney{{$participant->id}}" tabindex="-1" aria-labelledby="{{$participant->id}}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="d-flex flex-row">
                     <h5 class="modal-title me-3" id="{{$participant->id}}">
-                    Ajouter des Fonds pour 
+                    Retirer des Fonds de 
                     </h5>
                     <h5 class="modal-title text-info mb-0">{{$participant->pseudo}}</h5>
                 </div>
+                
                 <button
                     type="button"
                     class="btn-close"
@@ -16,7 +17,7 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('addMoney', $participant->id) }}">
+                <form method="POST" action="{{ route('debitMoney', $participant->id) }}">
                     @csrf
                     <div class="form-group form-floating mb-3 d-flex">
                         <input
@@ -27,9 +28,9 @@
                             name="inputMontant"
                             id="floatingMontant"
                             value="{{ old('inputMontant') }}"
-                            placeholder="First name"
+                            placeholder="Montant"
                         />
-                        <label for="floatingMontant">Montant ➕ <span>€</span></label>
+                        <label for="floatingMontant">Montant ➖ <span>€</span></label>
                     </div>
 
                     <div class="d-flex btn-G-L d-flex justify-content-center">
@@ -39,9 +40,9 @@
                             data-bs-toggle="modal"
                             data-bs-target="#modalLogin"
                             style="width: 45%"
-                            onclick="return confirm('Ajouter les fonds pour {{ $participant->pseudo }} ?');"
+                            onclick="return confirm('Retirer les fonds de {{ $participant->pseudo }} ?');"
                         >
-                            Rajouter
+                            Retirer
                         </button>
                     </div>
                 </form>

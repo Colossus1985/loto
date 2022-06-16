@@ -22,4 +22,5 @@ Route::post('updateParticipant/{idParticipant}', [participantController::class, 
 Route::get('searchParticipant', [participantController::class, 'searchParticipant'])->name('searchParticipant');
 
 Route::post('addMoney/{idParticipant}', [moneyController::class, 'addMoney'])->name('addMoney');
+Route::post('debitMoney/{idParticipant}', [moneyController::class, 'debitMoney'])->name('debitMoney');
 Route::post('retriveMoney/{idParticipant}', [moneyController::class, 'retriveMoney'])->name('retriveMoney');

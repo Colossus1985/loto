@@ -9,16 +9,16 @@
 </head>
 <body>
     @include('layouts.navbar')
-    <div class="mx-5 my-3">
+    <div class="mx-5 my-2">
         @if (session('success'))
             <p class="alert alert-success mt-3">{{ session('success') }}</p>
         @endif
         @if (session('error'))
             <p class="alert alert-danger mt-3">{{ session('error') }}</p>
-    @endif
+        @endif
     </div>
     @include('modals.addAddParticipant')
-    {{-- @include('modals.addMoney') --}}
+    
     @yield('content')
     
     @include('layouts.footer')
