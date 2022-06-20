@@ -32,7 +32,7 @@
                     </td>
                     {{-- <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#bookAutor">
                         Create a Autor</button> --}}
-                    @if ( $participant->amount == null || $participant->amount < 0)
+                    @if ( $participant->amount < 0)
                         <td class="bg-dark text-end text-white pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
                                 {{-- <a class="btn bg-light me-3" href="{{ route('participant', $participant->id) }}" role="button">
