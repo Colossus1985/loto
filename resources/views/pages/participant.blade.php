@@ -64,8 +64,24 @@
         </tr>
         @foreach ($actions as $action)
             <tr>
-                <td class="text-end fw-bold">{{ number_format($action->amount, 2) }}</td>
-
+                @if ($action->amount > 0)
+                    <td class="text-end fw-bold bg-dark text-white">
+                        {{ number_format($action->amount, 2) }}
+                    </td>
+                @elseif (($action->amount >= 0 && $action->amount <= 3.49) || $action->amount == null)
+                    <td class="text-end fw-bold bg-danger">
+                        {{ number_format($action->amount, 2) }}
+                    </td>
+                @elseif ($action->amount >= 3.50 && $action->amount <= 9.99)
+                    <td class="text-end fw-bold bg-warning">
+                        {{ number_format($action->amount, 2) }}
+                    </td>
+                @elseif ($action->amount >= 10.00)
+                    <td class="text-end fw-bold bg-success">
+                        {{ number_format($action->amount, 2) }}
+                    </td>
+                @endif
+                
                 @if ( $action->credit >= 0.01 )
                     <td class="bg-success text-end fw-bold">{{ number_format($action->credit, 2) }} €</td>
                 @else
