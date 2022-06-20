@@ -2,9 +2,19 @@
 @section('content')
 <div class="px-5">
     <div class="mt-0">
-        <div class="d-flex flex-row">
-            <h2 class="me-3">Fonds disponible :</h2>
-            <h2 class="text-info"> {{ $fonds }} €</h2>
+        <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row">
+                <h2 class="me-3">Fonds disponible :</h2>
+                <h2 class="text-info"> {{ number_format($fonds, 2) }} €</h2>
+            </div>
+            <div class="d-flex flex-row">
+                <h2 class="me-3">Gain engendré(s) :</h2>
+                <form action="{{ route('getGainHistory') }}">
+                    <button tupe="submit" class="btn btn-light py-0 mb-3">
+                        <h2 class="text-info m-0 p-0"> {{ $sommeGain }} €</h2>
+                    </button>
+                </form>
+            </div>
         </div>
         <table class="table table-bordered">
             <tr class="bg-light text-center">

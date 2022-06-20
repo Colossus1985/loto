@@ -9,27 +9,27 @@
                 <form method="POST" action="{{ route('addParticipant') }}">
                     @csrf
                     <div class="form-group form-floating mb-3 d-flex">
-                        <input type="text" class="form-control flex-fill" name="inputFirstName" id="floatingFirstName" value="{{ old('inputFirstName') }}" placeholder="First name">
+                        <input type="text" class="form-control flex-fill" name="inputFirstName" id="floatingFirstName" value="{{ old('inputFirstName') }}" placeholder="First name" required>
                         <label for="floatingFirstName">First Name</label>
                     </div>
             
                     <div class="form-group form-floating mb-3 d-flex">
-                        <input type="text" class="form-control flex-fill" name="inputLastName" id="floatingLastName" value="{{ old('inputLastName') }}" placeholder="Last name">
+                        <input type="text" class="form-control flex-fill" name="inputLastName" id="floatingLastName" value="{{ old('inputLastName') }}" placeholder="Last name" required>
                         <label for="floatingLastName">Last Name</label>
                     </div>
             
                     <div class="form-group form-floating mb-3 d-flex">
-                        <input type="text" class="form-control flex-fill" name="inputPseudo" id="floatingPseudo" value="{{ old('inputPseudo') }}" placeholder="Pseudo">
+                        <input type="text" class="form-control flex-fill" name="inputPseudo" id="floatingPseudo" value="{{ old('inputPseudo') }}" placeholder="Pseudo" required>
                         <label for="floatingPseudo">Pseudo</label>
                     </div>
                     
                     <div class="form-group form-floating mb-3 d-flex">
-                        <input type="email" class="form-control flex-fill" name="inputEmail" id="floatingEmail" value="{{ old('inputEmail') }}" placeholder="name@example.com">
+                        <input type="email" class="form-control flex-fill" name="inputEmail" id="floatingEmail" value="{{ old('inputEmail') }}" placeholder="name@example.com" required>
                         <label for="floatingEmail">Email address</label>
                     </div>
 
                     <div class="form-group form-floating mb-3 d-flex">
-                        <input type="text" class="form-control flex-fill" name="inputTel" id="floatingTel" value="{{ old('inputTel') }}" placeholder="Phone number">
+                        <input type="text" class="form-control flex-fill" name="inputTel" id="floatingTel" value="{{ old('inputTel') }}" placeholder="Phone number" required>
                         <label for="floatingTel">Phone number</label>
                     </div>
                     <div class="d-flex btn-G-L d-flex justify-content-center">

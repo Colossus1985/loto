@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gains;
 use App\Models\Money;
 use App\Models\Participants;
 use Egulias\EmailValidator\Parser\PartParser;
@@ -14,14 +15,30 @@ class participantController extends Controller
     {
         $participants = Participants::query()
             ->get();
-        $fonds = 0;
+
+        $fonds = 0.00;
         if (count($participants) != 0) {
             for ($i = 0;  $i < count($participants) ; $i++) {
                 $fonds = $fonds + $participants[$i]->amount;
             }
+            $fonds = number_format($fonds, 2);
         }
-        // dd($fonds);
-        return view('pages.main', ['participants' => $participants, 'fonds' => $fonds]);
+
+        $gains = Gains::query()
+            ->get();
+
+        $sommeGains = 0.00;
+        if (count($gains) != 0) {
+            for ($i = 0; $i < count($gains); $i++) {
+                $sommeGains = $sommeGains + $gains[$i]->amount;
+            }
+            $sommeGains = number_format($sommeGains, 2);
+        }
+        
+        return view('pages.main', [
+            'participants' => $participants, 
+            'fonds' => $fonds, 
+            'sommeGain' => $sommeGains]);
     }
 
     public function addParticipant(Request $request)

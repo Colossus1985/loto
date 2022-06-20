@@ -6,33 +6,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropUsers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Participants
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropUsers">
-                <li>
-                    <button type="button" class="btn mt-2 dropdown-item" data-bs-toggle="modal"
-                        data-bs-target="#modalAddParticipant">
-                        Ajouter
-                    </button>
-                <li><a class="dropdown-item disabled" href="#">Gérer</a></li>
-                </ul>
-            </li>
-            {{-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropMoney" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Finances
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropMoney">
-                <li><a class="dropdown-item" href="#">Ajouter</a></li>
-                <li><a class="dropdown-item" href="#">Gérer</a></li>
-                </ul>
-            </li> --}}
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="#" id="games" role="button" data-bs-toggle="" aria-expanded="false">
-                Jeux
-                </a>
-            </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropUsers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Participants
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropUsers">
+                    <li>
+                        <button type="button" class="btn mt-2 dropdown-item" data-bs-toggle="modal"
+                            data-bs-target="#modalAddParticipant">
+                            Ajouter
+                        </button>
+                    <li><a class="dropdown-item disabled" href="#">Gérer</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropGains" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Gains
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropGains">
+                        <li><a class="dropdown-item" href="{{ route('getGainHistory') }}">Gains</a></li>
+                        <li>
+                            <button type="button" class="btn mt-2 dropdown-item" data-bs-toggle="modal"
+                                data-bs-target="#modalAddGain">
+                                Ajouter Gain
+                            </button>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <form class="me-5" action="{{ route('searchParticipant') }}" method="GET">
                 @csrf
@@ -44,4 +46,5 @@
             </form>
         </div>
     </div>
+    @include('modals.addGain')
 </nav>

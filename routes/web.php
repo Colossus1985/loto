@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\gainController;
 use App\Http\Controllers\moneyController;
 use App\Http\Controllers\participantController;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::get('searchParticipant', [participantController::class, 'searchParticipan
 Route::post('addMoney/{idParticipant}', [moneyController::class, 'addMoney'])->name('addMoney');
 Route::post('debitMoney/{idParticipant}', [moneyController::class, 'debitMoney'])->name('debitMoney');
 Route::post('retriveMoney/{idParticipant}', [moneyController::class, 'retriveMoney'])->name('retriveMoney');
+
+Route::post('addGain', [gainController::class, 'addGain'])->name('addGain');
+Route::get('getGainHistory', [gainController::class, 'getGainHistory'])->name('getGainHistory');

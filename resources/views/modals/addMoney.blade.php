@@ -28,6 +28,7 @@
                             id="floatingMontant"
                             value="{{ old('inputMontant') }}"
                             placeholder="First name"
+                            required
                         />
                         <label for="floatingMontant">Montant ➕ <span>€</span></label>
                     </div>
