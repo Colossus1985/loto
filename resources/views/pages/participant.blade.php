@@ -64,7 +64,7 @@
         </tr>
         @foreach ($actions as $action)
             <tr>
-                @if ($action->amount > 0)
+                @if ($action->amount < 0)
                     <td class="text-end fw-bold bg-dark text-white">
                         {{ number_format($action->amount, 2) }}
                     </td>
