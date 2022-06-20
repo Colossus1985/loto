@@ -18,8 +18,7 @@
                 <form method="POST" action="{{ route('addGain') }}">
                     @csrf
                     <div class="form-group form-floating mb-3 d-flex">
-                        <div class="form-group form-floating me-3">
-                            
+                        <div class="form-group form-floating me-3 d-flex flex-fill">
                             <input
                                 type="number"
                                 min="0"
@@ -33,7 +32,7 @@
                             />
                             <label for="floatingMontant">Montant ➕ <span>€</span></label>
                         </div>
-                        <div class="form-group form-floating">
+                        <div class="form-group form-floating  d-flex flex-fill">
                             <input
                                 type="number"
                                 min="0"
@@ -75,7 +74,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex justify-content-between">
+            <div class="modal-footer d-flex flex-end">
                 <button
                     type="button"
                     class="btn btn-secondary"

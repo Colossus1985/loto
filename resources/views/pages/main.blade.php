@@ -46,7 +46,7 @@
                                 <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
-                            0 €
+                            0.00 €
                         </td>
                     @elseif ( $participant->amount <= 2.49)
                         <td class="bg-danger text-end pe-3 align-middle d-flex align-items-center justify-content-between">
@@ -62,7 +62,7 @@
                                 <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
-                            {{ $participant->amount }} €
+                            {{ number_format($participant->amount, 2) }} €
                         </td>
                     @elseif ( $participant->amount < 10 && $participant->amount >= 2.5)
                         <td class="bg-warning text-end pe-3 align-middle d-flex align-items-center justify-content-between">
@@ -78,7 +78,7 @@
                                 <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
-                            {{ $participant->amount }} €
+                            {{ number_format($participant->amount, 2) }} €
                         </td>
                     @elseif ( $participant->amount >= 10)
                         <td class="bg-success text-end pe-3 align-middle d-flex align-items-center justify-content-between">
@@ -94,10 +94,10 @@
                                 <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
-                            {{ $participant->amount }} €
+                            {{ number_format($participant->amount, 2) }} €
                         </td>
                     @endif
-                    <td class="align-middle text-end">{{ $participant->totalAmount }} €
+                    <td class="align-middle text-end">{{ number_format($participant->totalAmount, 2) }} €
                 </tr>
                 @include('modals.addMoney')
                 @include('modals.debitMoney')

@@ -37,7 +37,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex justify-content-between">
+            <div class="modal-footer d-flex flex-end">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
