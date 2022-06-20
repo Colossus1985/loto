@@ -32,7 +32,23 @@
                     </td>
                     {{-- <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#bookAutor">
                         Create a Autor</button> --}}
-                    @if ( $participant->amount == null || $participant->amount == 0)
+                    @if ( $participant->amount == null || $participant->amount < 0)
+                        <td class="bg-dark text-end text-white pe-3 align-middle d-flex align-items-center justify-content-between">
+                            <div class="d-flex flex-row">
+                                {{-- <a class="btn bg-light me-3" href="{{ route('participant', $participant->id) }}" role="button">
+                                    ➕
+                                </a>
+                                <a class="btn bg-light" href="{{ route('participant', $participant->id) }}" role="button">
+                                    ➖
+                                </a> --}}
+                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
+                                    ➕</button>
+                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
+                                    ➖</button>
+                            </div>
+                            {{ number_format($participant->amount, 2) }} €
+                        </td>
+                    @elseif ( $participant->amount == null || $participant->amount == 0)
                         <td class="bg-danger text-end pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
                                 {{-- <a class="btn bg-light me-3" href="{{ route('participant', $participant->id) }}" role="button">
@@ -48,7 +64,7 @@
                             </div>
                             0.00 €
                         </td>
-                    @elseif ( $participant->amount <= 2.49)
+                    @elseif ( $participant->amount <= 3.49)
                         <td class="bg-danger text-end pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
                                 {{-- <a class="btn bg-light me-3" href="{{ route('participant', $participant->id) }}" role="button">
@@ -64,7 +80,7 @@
                             </div>
                             {{ number_format($participant->amount, 2) }} €
                         </td>
-                    @elseif ( $participant->amount < 10 && $participant->amount >= 2.5)
+                    @elseif ( $participant->amount < 10 && $participant->amount >= 3.5)
                         <td class="bg-warning text-end pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
                                 {{-- <a class="btn bg-light me-3" href="{{ route('participant', $participant->id) }}" role="button">
