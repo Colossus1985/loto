@@ -102,6 +102,9 @@ class participantController extends Controller
     
     public function participant($idParticipant)
     {
+        $participants = Participants::query()
+            ->get();
+
         $participant = Participants::query()
             ->where('id', '=', $idParticipant)
             ->get();
@@ -113,7 +116,7 @@ class participantController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('pages.participant', ['participant' => $participant, 'actions' => $money]);
+        return view('pages.participant', ['participant' => $participant, 'actions' => $money, 'participants' => $participants]);
     }
 
     public function searchParticipant(Request $request)
