@@ -18,6 +18,7 @@
         @endif
     </div>
     @include('modals.addAddParticipant')
+    @include('modals.jouer')
     
     @yield('content')
     
