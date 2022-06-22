@@ -12,7 +12,7 @@ class gainController extends Controller
     public function addGain(Request $request)
     {
         $arrayParticipantWin = $request->inputParticipantWinArray;
-
+        
         $gainValue = $request->inputAmount;
         $nbPersonnes = count($arrayParticipantWin);
         $gainIndividuel = bcdiv($gainValue, $nbPersonnes, 2); //downRounding 0.9999 = 0.99
@@ -27,7 +27,6 @@ class gainController extends Controller
         $addMoney = $request->inputAddGainAuto;
         if ($addMoney == true) {
             for ($i = 0; $i < count($arrayParticipantWin); $i++) {
-                
                 $participant = Participants::query()
                     ->where('pseudo', '=', $arrayParticipantWin[$i])
                     ->get();
@@ -56,13 +55,11 @@ class gainController extends Controller
                 $action->pseudo = $pseudo;
                 $action->id_pseudo = $idParticipant;
                 $action->amount = number_format($amount, 2);
-                $action->credit = number_format($credit, 2);
+                $action->creditGain = number_format($credit, 2);
                 $action->save();
-
-                return redirect()->back()
-                    ->with('success', 'felicitation, votre gain de '. $gainValue. '€ à été enrégistré et partagé parmi les participant(s)! 🥳🥳🥳🥳🥳🥳');
             }
-                
+            return redirect()->back()
+                ->with('success', 'felicitation, votre gain de '. $gainValue. '€ à été enrégistré et partagé parmi les participant(s)! 🥳🥳🥳🥳🥳🥳');
         }
 
         return redirect()->back()

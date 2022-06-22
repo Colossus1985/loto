@@ -20,6 +20,7 @@ return new class extends Migration
         $table->float('amount')->default(0.00);
         $table->float('credit')->default(0.00);
         $table->float('debit')->default(0.00);
+        $table->float('creditGain')->default(0.00);
         $table->timestamps();
         });
     }

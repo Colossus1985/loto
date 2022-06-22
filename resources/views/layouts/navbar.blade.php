@@ -17,7 +17,13 @@
                             data-bs-target="#modalAddParticipant">
                             Ajouter
                         </button>
-                    <li><a class="dropdown-item disabled" href="#">Gérer</a></li>
+                    </li>
+                    <li>
+                        <button type="button" class="btn mt-2 dropdown-item" data-bs-toggle="modal"
+                            data-bs-target="#modalJouer">
+                            Jouer
+                        </button>
+                    </li>
                     </ul>
                 </li>
 

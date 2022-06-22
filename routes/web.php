@@ -25,6 +25,7 @@ Route::get('searchParticipant', [participantController::class, 'searchParticipan
 Route::post('addMoney/{idParticipant}', [moneyController::class, 'addMoney'])->name('addMoney');
 Route::post('debitMoney/{idParticipant}', [moneyController::class, 'debitMoney'])->name('debitMoney');
 Route::post('retriveMoney/{idParticipant}', [moneyController::class, 'retriveMoney'])->name('retriveMoney');
+Route::post('debitAll', [moneyController::class, 'debitAll'])->name('debitAll');
 
 Route::post('addGain', [gainController::class, 'addGain'])->name('addGain');
 Route::get('getGainHistory', [gainController::class, 'getGainHistory'])->name('getGainHistory');
