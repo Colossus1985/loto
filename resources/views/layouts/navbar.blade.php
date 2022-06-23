@@ -45,7 +45,7 @@
             <form class="me-5" action="{{ route('searchParticipant') }}" method="GET">
                 @csrf
                 <div class="input-group ">
-                    <input class="form-control me-1 mt-2" name="inputParticipant" placeholder="Participant..."
+                    <input class="form-control me-1 mt-2" maxlength="15" name="inputParticipant" placeholder="Participant..."
                         aria-label="Participant...">
                     <button class="btn btn-outline-success ms-1 mt-2" type="submit">🔎</button>
                 </div>
