@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="border border-3 rounded-3 px-3 d-flex flex-column flex-fill mt-3 mb-3">
-                        <p class="my-1">Est ce qu'un gain?</p>
+                        <p class="my-1">Est ce un gain?</p>
                         <div class="d-flex flex-column flex-fill  justify-content-around mb-2">
                             <div class="d-flex flex-row">
                                 <input type="radio" class="me-3" name="inputAddGain" id="info-outlined-yes" autocomplete="off" value="true" checked>
