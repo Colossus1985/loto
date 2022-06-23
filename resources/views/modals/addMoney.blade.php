@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="d-flex flex-row">
-                    <h5 class="modal-title me-3" id="{{$participant->id}}">
-                    Ajouter des Fonds pour 
+                    <h5 class="modal-title me-1" id="{{$participant->id}}">
+                        💲💲 Ajouter des Fonds pour 
                     </h5>
-                    <h5 class="modal-title text-info mb-0">{{$participant->pseudo}}</h5>
+                    <h5 class="modal-title text-info mb-0">{{$participant->pseudo}} 💲💲</h5>
                 </div>
                 <button
                     type="button"
@@ -16,7 +16,7 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('addMoney', $participant->id) }}">
+                <form class="d-flex flex-row" method="POST" action="{{ route('addMoney', $participant->id) }}">
                     @csrf
                     <div class="form-group form-floating mb-3 d-flex">
                         <input
@@ -33,9 +33,23 @@
                         <label for="floatingMontant">Montant ➕ <span>€</span></label>
                     </div>
 
-                    <div class="d-flex btn-G-L d-flex justify-content-center">
+                    <div class="border border-3 rounded-3 px-3 d-flex flex-column flex-fill mt-3 mb-3">
+                        <p class="my-1">Est ce qu'un gain?</p>
+                        <div class="d-flex flex-column flex-fill  justify-content-around mb-2">
+                            <div class="d-flex flex-row">
+                                <input type="radio" class="me-3" name="inputAddGain" id="info-outlined-yes" autocomplete="off" value="true" checked>
+                            <label class="btn-outline-info" for="info-outlined-yes">Oui</label>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <input type="radio" class="me-3" name="inputAddGain" id="info-outlined-no" autocomplete="off" value="false">
+                                <label class="btn-outline-info" for="info-outlined-no">Non</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex btn-G-L d-flex justify-content-end">
                         <button
-                            class="btn btn-primary me-4"
+                            class="btn btn-primary"
                             type="submit"
                             data-bs-toggle="modal"
                             data-bs-target="#modalLogin"
@@ -47,7 +61,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex flex-end">
+            <div class="modal-footer d-flex justify-content-start">
                 <button
                     type="button"
                     class="btn btn-secondary"

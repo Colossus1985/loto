@@ -2,9 +2,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="d-flex flex-row">
+                <div class="d-flex justify-content-center">
                     <h5 class="modal-title me-3" id="jouer">
-                        🍀🍀🍀 Miser pour jouer 🍀🍀🍀
+                        🍀🍀🍀🍀 Miser pour jouer 🍀🍀🍀🍀
                     </h5>
                 </div>
                 <button
@@ -53,21 +53,21 @@
                         </div>
                     </div>
 
-                    <div class="d-flex btn-G-L d-flex justify-content-center">
+                    <div class="d-flex btn-G-L d-flex justify-content-end">
                         <button
-                            class="btn btn-primary me-4"
+                            class="btn btn-primary"
                             type="submit"
                             data-bs-toggle="modal"
                             data-bs-target="#modalLogin"
-                            style="width: 45%"
-                            onclick="return confirm('Jouer et retirer la part de tous les participant(s)?');"
+                            style="width: 50%"
+                            onclick="return confirm('Jouer et retirer la mise de tous les participant(s)?');"
                         >
-                            Enregistrer
+                            Jouer
                         </button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex flex-end">
+            <div class="modal-footer d-flex justify-content-start">
                 <button
                     type="button"
                     class="btn btn-secondary"

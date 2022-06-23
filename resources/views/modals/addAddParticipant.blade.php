@@ -19,7 +19,7 @@
                     </div>
             
                     <div class="form-group form-floating mb-3 d-flex">
-                        <input type="text" class="form-control flex-fill" name="inputPseudo" id="floatingPseudo" value="{{ old('inputPseudo') }}" placeholder="Pseudo" required>
+                        <input type="text" class="form-control flex-fill" name="inputPseudo" maxlength="15" id="floatingPseudo" value="{{ old('inputPseudo') }}" placeholder="Pseudo" required>
                         <label for="floatingPseudo">Pseudo</label>
                     </div>
                     
@@ -32,12 +32,12 @@
                         <input type="text" class="form-control flex-fill" name="inputTel" id="floatingTel" value="{{ old('inputTel') }}" placeholder="Phone number" required>
                         <label for="floatingTel">Phone number</label>
                     </div>
-                    <div class="d-flex btn-G-L d-flex justify-content-center">
-                        <button class="btn btn-primary me-4" type="submit" data-bs-toggle="modal" data-bs-target="#modalLogin" style="width: 45%;">Confirm</button>
+                    <div class="d-flex btn-G-L d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#modalLogin" style="width: 45%;">Ajouter</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex flex-end">
+            <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>

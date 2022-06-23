@@ -80,8 +80,9 @@ class participantController extends Controller
             ->where('id', '=', $idParticipant)
             ->delete();
 
-        return redirect()->back()
+        return redirect()->route('home')
             ->with('success', $participant[0]->pseudo.' a été supprimé avec succès!');
+
     }
 
     public function updateParticipant(Request $request, $idParticipant)
