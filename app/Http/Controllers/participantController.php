@@ -43,15 +43,26 @@ class participantController extends Controller
 
     public function addParticipant(Request $request)
     {
+        $pseudo = $request->inputPseudo;
+        $email = $request->inputEmail;
+
+        $participantExist = Participants::query()
+            ->where('pseudo', '=', $pseudo)
+            ->orWhere('email', '=', $email)
+            ->get();
+
+        if (count($participantExist) != 0) {
+            return redirect()->back()
+                ->with('error', $pseudo.' ou '.$email.' déjà existant!');
+        }
+
         $participant = new Participants();
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;
-        $participant->pseudo = $request->inputPseudo;
-        $participant->email = $request->inputEmail;
+        $participant->pseudo = $pseudo;
+        $participant->email = $email;
         $participant->tel = $request->inputTel;
         $participant->save();
-
-        $pseudo = $request->inputPseudo;
 
         $participant = Participants::query()
             ->where('pseudo', '=', $pseudo)
@@ -123,13 +134,46 @@ class participantController extends Controller
     public function searchParticipant(Request $request)
     {
         $userSearched = trim($request -> get('inputParticipant'));
+        $participantSearched = Participants::query()
+            ->where('pseudo', 'like', "%{$userSearched}%")
+            ->orWhere('email', 'like', "%{$userSearched}%")
+            ->orderBy('created_at', 'ASC')
+            ->get();
+        
         $participants = Participants::query()
             ->where('pseudo', 'like', "%{$userSearched}%")
             ->orWhere('email', 'like', "%{$userSearched}%")
             ->orderBy('created_at', 'ASC')
             ->get();
 
-        return view('pages.main', ['participants' => $participants]);
+        $fonds = 0.00;
+        if (count($participants) != 0) {
+            for ($i = 0;  $i < count($participants) ; $i++) {
+                $fonds = $fonds + $participants[$i]->amount;
+            }
+            $fonds = number_format($fonds, 2);
+        }
+    
+        $gains = Gains::query()
+            ->get();
+    
+        $sommeGains = 0.00;
+        if (count($gains) != 0) {
+            for ($i = 0; $i < count($gains); $i++) {
+                $sommeGains = $sommeGains + $gains[$i]->amount;
+            }
+            $sommeGains = number_format($sommeGains, 2);
+        }
+
+        if (count($participantSearched) == 0) {
+            return redirect()->route('home')
+                ->with('error', 'il n\'y pas de Pseudo ou email contenant "'.$userSearched.'"');
+        }
+
+        return view('pages.main', [
+            'participants' => $participants, 
+            'fonds' => $fonds, 
+            'sommeGain' => $sommeGains]);
     }
     
 }
