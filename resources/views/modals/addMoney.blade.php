@@ -37,11 +37,11 @@
                         <p class="my-1">Est ce un gain?</p>
                         <div class="d-flex flex-column flex-fill  justify-content-around mb-2">
                             <div class="d-flex flex-row">
-                                <input type="radio" class="me-3" name="inputAddGain" id="info-outlined-yes" autocomplete="off" value="true" checked>
+                                <input type="radio" class="me-3" name="inputAddGain" id="info-outlined-yes" autocomplete="off" value="true" >
                             <label class="btn-outline-info" for="info-outlined-yes">Oui</label>
                             </div>
                             <div class="d-flex flex-row">
-                                <input type="radio" class="me-3" name="inputAddGain" id="info-outlined-no" autocomplete="off" value="false">
+                                <input type="radio" class="me-3" name="inputAddGain" id="info-outlined-no" autocomplete="off" value="false" checked>
                                 <label class="btn-outline-info" for="info-outlined-no">Non</label>
                             </div>
                         </div>
