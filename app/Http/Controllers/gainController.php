@@ -25,7 +25,7 @@ class gainController extends Controller
         $gain->save();
         
         $addMoney = $request->inputAddGainAuto;
-        if ($addMoney == true) {
+        if ($addMoney === "true") {
             for ($i = 0; $i < count($arrayParticipantWin); $i++) {
                 $participant = Participants::query()
                     ->where('pseudo', '=', $arrayParticipantWin[$i])
@@ -72,6 +72,7 @@ class gainController extends Controller
             ->get();
         
         $gains = Gains::query()
+            ->orderBy('date', 'desc')
             ->get();
         
         $sommeGains = 0.00;

@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <div class="d-flex flex-row">
                     <h5 class="modal-title me-3" id="addGain">
-                        🥳🥳 Ajouter des Gain 🥳🥳
+                        🥳🥳🥳🥳 Ajouter un Gain 🥳🥳🥳🥳
                     </h5>
                 </div>
                 <button
@@ -45,14 +45,27 @@
                                 />
                                 <label for="floatingDate">Date</label>
                             </div>
+                            <div class="border border-3 rounded-3 px-3 d-flex flex-column flex-fill mt-3">
+                                <p class="my-1">Rajouter les gains au(x) participant(s) automatiquement?</p>
+                                <div class="d-flex flex-row flex-fill mb-2 justify-content-around">
+                                    <input type="radio" class="btn-check flex-fill" name="inputAddGainAuto" id="info-outlined-yes" autocomplete="off" value="true" checked
+                                        style="width: 40%">
+                                    <label class="btn btn-outline-info" for="info-outlined-yes">Oui</label>
+        
+                                    <input type="radio" class="btn-check flex-fill" name="inputAddGainAuto" id="info-outlined-no" autocomplete="off" value="false"
+                                        style="width: 40%">
+                                    <label class="btn btn-outline-info" for="info-outlined-no">Non</label>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
-                            <div class="form-check form-switch">
-                                <p class="mb-0">Choisir le(s) Participant(s) : </p>
+                            <div class="">
+                                <p class="mt-1 mb-2 ps-3">Choisir le(s) Participant(s) : </p>
                             </div>
                             @foreach ($participants as $participant)
                                 <div class="ms-3 form-check form-switch">
-                                    <input class="form-check-input"
+                                    <input class="form-check-input me-3"
                                         type="checkbox" 
                                         name="inputParticipantWinArray[]" 
                                         role="switch" 
@@ -65,32 +78,21 @@
                         </div>
                     </div>
 
-                    <div class="border border-3 rounded-3 px-3 d-flex flex-column flex-fill mb-3">
-                        <p class="my-1">Rajouter les gains au(x) participant(s) automatiquement?</p>
-                        <div class="d-flex flex-row flex-fill mb-2">
-                            <input type="radio" class="btn-check flex-fill me-3" name="inputAddGainAuto" id="info-outlined-yes" autocomplete="off" value="true" checked>
-                            <label class="btn btn-outline-info" for="info-outlined-yes">Oui</label>
-
-                            <input type="radio" class="btn-check flex-fill" name="inputAddGainAuto" id="info-outlined-no" autocomplete="off" value="false">
-                            <label class="btn btn-outline-info" for="info-outlined-no">Non</label>
-                        </div>
-                    </div>
-                    
-                    <div class="d-flex btn-G-L d-flex justify-content-center">
+                    <div class="d-flex btn-G-L justify-content-end">
                         <button
-                            class="btn btn-primary me-4"
+                            class="btn btn-primary"
                             type="submit"
                             data-bs-toggle="modal"
                             data-bs-target="#modalLogin"
                             style="width: 45%"
-                            onclick="return confirm('Ajouter les gains?');"
+                            onclick="return confirm('Ajouter le gain?');"
                         >
-                            Enregistrer
+                            Ajouter Gain
                         </button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex flex-end">
+            <div class="modal-footer d-flex justify-content-start">
                 <button
                     type="button"
                     class="btn btn-secondary"

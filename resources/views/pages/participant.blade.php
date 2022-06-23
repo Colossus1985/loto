@@ -59,8 +59,8 @@
         <tr class="bg-light text-center">
             <th>Montant</th>
             <th>Credit</th>
-            <th>Credit Gain</th>
             <th>Debit</th>
+            <th>Credit Gain</th>
             <th>Date</th>
         </tr>
         @foreach ($actions as $action)
@@ -89,23 +89,24 @@
                     <td class="text-end fw-bold">{{ number_format($action->credit, 2) }} €</td>
                 @endif
 
+                @if ( $action->debit >= 0.01 )
+                    <td class="bg-danger text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
+                @else
+                    <td class="text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
+                @endif
+
                 @if ( $action->creditGain >= 0.01 )
                     <td class="bg-success text-end fw-bold">{{ number_format($action->creditGain, 2) }} €</td>
                 @else
                     <td class="text-end fw-bold">{{ number_format($action->creditGain, 2) }} €</td>
                 @endif
 
-                @if ( $action->debit >= 0.01 )
-                    <td class="bg-danger text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
-                @else
-                    <td class="text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
-                @endif
                 <td class="fw-bold text-center">{{ $action->created_at }}</td>
             </tr>
         @endforeach
     </table>
 
-    <form action="{{ route('participantDelete', $participant[0]->id) }}" method="Post">
+    <form action="{{ route('participantDelete', $participant[0]->id) }}" method="get">
         @csrf
         @method('DELETE')
         <div class="">

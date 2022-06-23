@@ -27,7 +27,8 @@ class moneyController extends Controller
         $totalAmount = $participant[0]->totalAmount;
             $totalAmount = $totalAmount + $credit;
         
-
+        $gain = $request->inputAddGain;
+        
         $participant = Participants::find($idParticipant);
         $participant->amount = number_format($amount, 2);
         $participant->totalAmount = number_format($totalAmount, 2);
@@ -37,7 +38,11 @@ class moneyController extends Controller
         $action->pseudo = $pseudo;
         $action->id_pseudo = $idParticipant;
         $action->amount = number_format($amount, 2);
-        $action->credit = number_format($credit, 2);
+        if ($gain === "true") {
+            $action->creditGain = number_format($credit, 2);
+        } else {
+            $action->credit = number_format($credit, 2);
+        }
         $action->save();
 
         return redirect()->back()

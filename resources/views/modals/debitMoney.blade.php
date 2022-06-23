@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <div class="d-flex flex-row">
                     <h5 class="modal-title me-3" id="{{$participant->id}}">
-                    Retirer des Fonds de 
+                        💲💲💲💲 Retirer des Fonds de 💲💲💲💲
                     </h5>
                     <h5 class="modal-title text-info mb-0">{{$participant->pseudo}}</h5>
                 </div>
@@ -34,9 +34,9 @@
                         <label for="floatingMontant">Montant ➖ <span>€</span></label>
                     </div>
 
-                    <div class="d-flex btn-G-L d-flex justify-content-center">
+                    <div class="d-flex btn-G-L d-flex justify-content-end">
                         <button
-                            class="btn btn-primary me-4"
+                            class="btn btn-primary"
                             type="submit"
                             data-bs-toggle="modal"
                             data-bs-target="#modalLogin"
@@ -48,7 +48,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer d-flex flex-end">
+            <div class="modal-footer d-flex justify-content-start">
                 <button
                     type="button"
                     class="btn btn-secondary"
