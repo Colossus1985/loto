@@ -4,9 +4,9 @@
             <div class="modal-header">
                 <div class="d-flex flex-row">
                     <h5 class="modal-title me-3" id="{{$participant->id}}">
-                        💲💲💲💲 Retirer des Fonds de 💲💲💲💲
+                        💲💲 Retirer des Fonds de 
                     </h5>
-                    <h5 class="modal-title text-info mb-0">{{$participant->pseudo}}</h5>
+                    <h5 class="modal-title text-info mb-0">{{$participant->pseudo}} 💲💲</h5>
                 </div>
                 
                 <button
