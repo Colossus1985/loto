@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gains;
+use App\Models\Groups;
 use App\Models\Money;
 use App\Models\Participants;
 use Illuminate\Http\Request;
@@ -82,7 +83,14 @@ class gainController extends Controller
             }
             $sommeGains = number_format($sommeGains, 2);
         }
+
+        $groups = Groups::query()
+            ->get();
         
-        return view('pages.gains', ['gains' => $gains, 'sommeGains' => $sommeGains, 'participants' => $participants]);
+        return view('pages.gains', [
+            'gains' => $gains,
+            'sommeGains' => $sommeGains,
+            'participants' => $participants,
+            'groups' => $groups]);
     } 
 }

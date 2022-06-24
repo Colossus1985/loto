@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gains;
+use App\Models\Groups;
 use App\Models\Money;
 use App\Models\Participants;
 use Egulias\EmailValidator\Parser\PartParser;
@@ -16,6 +17,9 @@ class participantController extends Controller
         $participants = Participants::query()
             ->get();
 
+        $groups = Groups::query()
+            ->get();
+            
         $fonds = 0.00;
         if (count($participants) != 0) {
             for ($i = 0;  $i < count($participants) ; $i++) {
@@ -34,11 +38,15 @@ class participantController extends Controller
             }
             $sommeGains = number_format($sommeGains, 2);
         }
+
+        $groups = Groups::query()
+            ->get();
         
         return view('pages.main', [
             'participants' => $participants, 
             'fonds' => $fonds, 
-            'sommeGain' => $sommeGains]);
+            'sommeGain' => $sommeGains,
+            'groups' => $groups]);
     }
 
     public function addParticipant(Request $request)
@@ -103,6 +111,7 @@ class participantController extends Controller
         $participant = Participants::find($idParticipant);
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;
+        $participant->nameGroup = $request->inputNameGroup;
         $participant->pseudo = $request->inputPseudo;
         $participant->email = $request->inputEmail;
         $participant->tel = $request->inputTel;
@@ -128,7 +137,14 @@ class participantController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('pages.participant', ['participant' => $participant, 'actions' => $money, 'participants' => $participants]);
+        $groups = Groups::query()
+            ->get();
+
+        return view('pages.participant', 
+            ['participant' => $participant, 
+            'actions' => $money, 
+            'participants' => $participants,
+            'groups' => $groups]);
     }
 
     public function searchParticipant(Request $request)
@@ -170,10 +186,14 @@ class participantController extends Controller
                 ->with('error', 'il n\'y pas de Pseudo ou email contenant "'.$userSearched.'"');
         }
 
+        $groups = Groups::query()
+            ->get();
+
         return view('pages.main', [
             'participants' => $participants, 
             'fonds' => $fonds, 
-            'sommeGain' => $sommeGains]);
+            'sommeGain' => $sommeGains,
+            'groups' => $groups]);
     }
     
 }

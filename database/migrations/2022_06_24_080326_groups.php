@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
+
 {
     /**
      * Run the migrations.
@@ -13,16 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('participants', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('nameGroup')->nullable();
-            $table->string('pseudo')->unique();
-            $table->string('email')->unique();
-            $table->string('tel');
-            $table->float('amount')->nullable();
-            $table->float('totalAmount')->nullable();
+            $table->string('nameGroup');
             $table->timestamps();
         });
     }

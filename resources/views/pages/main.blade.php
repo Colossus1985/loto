@@ -3,10 +3,19 @@
 <div class="px-5">
     <div class="mt-0">
         <div class="d-flex flex-row justify-content-between">
+
+            {{-- @foreach ($fonds as $fond )
+                <div class="d-flex flex-row">
+                    <h2 class="me-3 fw-bold">Fonds disponible :</h2>
+                    <h2 class="text-info fw-bold"> {{ number_format($fonds, 2) }} €</h2>
+                </div>
+            @endforeach --}}
+
             <div class="d-flex flex-row">
                 <h2 class="me-3 fw-bold">Fonds disponible :</h2>
                 <h2 class="text-info fw-bold"> {{ number_format($fonds, 2) }} €</h2>
             </div>
+            
             <div class="d-flex flex-row">
                 <h2 class="me-3 fw-bold">Gain engendré(s) :</h2>
                 <form action="{{ route('getGainHistory') }}">
@@ -18,12 +27,18 @@
         </div>
         <table class="table table-bordered">
             <tr class="bg-light text-center fs-4">
+                <th>Groupe</th>
                 <th>Pseudo</th>
                 <th>Disponible</th>
                 <th>Joué</th>
             </tr>
             @foreach ($participants as $participant)
                 <tr>
+                    @if ($participant->nameGroup == null || $participant->nameGroup == "")
+                        <td class="text_nowrap align-middle d-flex align-items-center justify-content-center">pas de groupe</td>
+                    @else
+                        <td class="text_nowrap align-middle d-flex align-items-center justify-content-center">{{ $participant->nameGroup }}</td>
+                    @endif
                     <td>
                         <form action="{{ route('participant', $participant->id) }}" method="get">
                             <input type="submit" class="form-control me-2 btn btnhover"
