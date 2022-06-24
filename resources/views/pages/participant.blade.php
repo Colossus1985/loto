@@ -29,10 +29,15 @@
                     value="{{ $participant[0]->tel }}">
                 <label for="floatingTel" class="text-nowrap">Phone</label>
             </div>
-            <div class="form-group form-floating mb-3 d-flex flex-fill">
-                <input id="floatingAge" type="email" class="form-control flex-fill fw-bold" name="inputEmail"
+            <div class="form-group form-floating mb-3 me-3 d-flex flex-fill">
+                <input id="floatingEmail" type="email" class="form-control flex-fill fw-bold" name="inputEmail"
                     value="{{ $participant[0]->email }}">
-                <label for="floatingAge" class="text-nowrap">Email</label>
+                <label for="floatingEmail" class="text-nowrap">Email</label>
+            </div>
+            <div class="form-group form-floating mb-3 d-flex flex-fill">
+                <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroup"
+                    value="{{ $participant[0]->nameGroup }}">
+                <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
             </div>
         </div>
 

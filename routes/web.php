@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\gainController;
+use App\Http\Controllers\groupsController;
 use App\Http\Controllers\moneyController;
 use App\Http\Controllers\participantController;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,6 @@ Route::post('debitAll', [moneyController::class, 'debitAll'])->name('debitAll');
 
 Route::post('addGain', [gainController::class, 'addGain'])->name('addGain');
 Route::get('getGainHistory', [gainController::class, 'getGainHistory'])->name('getGainHistory');
+
+Route::post('addGroup', [groupsController::class, 'addGroup'])->name('addGroup');
+Route::post('participantGroup', [groupsController::class, 'participantGroup'])->name('participantGroup');

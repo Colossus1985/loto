@@ -41,7 +41,28 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropUsers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Groupes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropUsers">
+                    <li>
+                        <button type="button" class="btn mt-2 dropdown-item" data-bs-toggle="modal"
+                            data-bs-target="#modalAddGroup">
+                            Créer Groupe
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn mt-2 dropdown-item" data-bs-toggle="modal"
+                            data-bs-target="#modalParticipantGroup">
+                            Gérer Groupes
+                        </button>
+                    </li>
+                    </ul>
+                </li>
             </ul>
+
             <form class="me-5" action="{{ route('searchParticipant') }}" method="GET">
                 @csrf
                 <div class="input-group ">

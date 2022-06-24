@@ -19,6 +19,8 @@
     </div>
     @include('modals.addAddParticipant')
     @include('modals.jouer')
+    @include('modals.addGroup')
+    @include('modals.participantGroup')
     
     @yield('content')
     
