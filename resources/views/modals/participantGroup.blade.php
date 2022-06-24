@@ -45,7 +45,7 @@
                                     <div class="ms-3 form-check form-switch">
                                         <input class="form-check-input me-3"
                                             type="checkbox" 
-                                            name="inputParticipantWinArray[]" 
+                                            name="inputParticipantArray[]" 
                                             role="switch" 
                                             id="flexSwitchCheckDefault" 
                                             value="{{ $participant->pseudo }}">

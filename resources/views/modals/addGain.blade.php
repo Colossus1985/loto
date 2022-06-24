@@ -46,7 +46,7 @@
                                 <label for="floatingDate">Date</label>
                             </div>
                             <div class="border border-3 rounded-3 px-3 d-flex flex-column flex-fill mt-3">
-                                <p class="my-1">Rajouter les gains au(x) participant(s) automatiquement?</p>
+                                <p class="my-1">Rajouter les gains au(x) participant(s)</br> du group choisit automatiquement?</p>
                                 <div class="d-flex flex-row flex-fill mb-2 justify-content-around">
                                     <input type="radio" class="btn-check flex-fill" name="inputAddGainAuto" id="info-outlined-yes" autocomplete="off" value="true" checked
                                         style="width: 40%">
@@ -60,6 +60,23 @@
                         </div>
 
                         <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
+                            <div class="">
+                                <p class="mt-1 mb-2 ps-3">Choisir le groupe : </p>
+                            </div>
+                            @foreach ($groups as $group)
+                                <div class="ms-3 form-check form-switch">
+                                    <input class="form-check-input me-3"
+                                        type="checkbox" 
+                                        name="inputNameGroup" 
+                                        role="switch" 
+                                        id="flexSwitchNameGroup" 
+                                        checked
+                                        value="{{ $group->nameGroup }}">
+                                    <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup}}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        {{-- <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
                             <div class="">
                                 <p class="mt-1 mb-2 ps-3">Choisir le(s) Participant(s) : </p>
                             </div>
@@ -75,7 +92,7 @@
                                     <label class="form-check-label" for="flexSwitchCheckDefault">{{ $participant->pseudo}}</label>
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="d-flex btn-G-L justify-content-end">

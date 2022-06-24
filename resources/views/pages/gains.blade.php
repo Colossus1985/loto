@@ -18,6 +18,7 @@
         </div>
         <table class="table table-bordered">
             <tr class="bg-light text-center fs-4">
+                <th>Groupe</th>
                 <th class="">Gain</th>
                 <th>Gain individuel</th>
                 <th>Date</th>
@@ -25,6 +26,7 @@
             </tr>
             @foreach ($gains as $gain)
                 <tr>
+                    <td>{{ $gain->nameGroup }}</td>
                     <td class="text-end align-middle fw-bold">
                         <span>{{ number_format($gain->amount, 2) }} €</span>
                     </td>

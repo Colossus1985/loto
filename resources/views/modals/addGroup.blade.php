@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <div class="d-flex flex-row">
                     <h5 class="modal-title me-3" id="addGain">
-                        Créer un Group
+                        Créer un Groupe
                     </h5>
                 </div>
                 <button

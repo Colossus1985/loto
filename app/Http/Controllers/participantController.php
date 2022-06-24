@@ -15,17 +15,29 @@ class participantController extends Controller
     public function home()
     {
         $participants = Participants::query()
+            ->orderBy('nameGroup', 'asc')
             ->get();
-
+        
         $groups = Groups::query()
             ->get();
-            
-        $fonds = 0.00;
-        if (count($participants) != 0) {
-            for ($i = 0;  $i < count($participants) ; $i++) {
-                $fonds = $fonds + $participants[$i]->amount;
+
+        $arrayFondsByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+                $participantOfGroup = Participants::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $fonds = 0.00;
+                if (count($participantOfGroup) != 0) {
+                    for ($a = 0;  $a < count($participantOfGroup) ; $a++) {
+                        $fonds = $fonds + $participantOfGroup[$a]->amount;
+                    }
+                    $fonds = number_format($fonds, 2);
+                    array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
+                    
+                }
             }
-            $fonds = number_format($fonds, 2);
         }
 
         $gains = Gains::query()
@@ -39,12 +51,9 @@ class participantController extends Controller
             $sommeGains = number_format($sommeGains, 2);
         }
 
-        $groups = Groups::query()
-            ->get();
-        
         return view('pages.main', [
             'participants' => $participants, 
-            'fonds' => $fonds, 
+            'fonds' => $arrayFondsByGroup, 
             'sommeGain' => $sommeGains,
             'groups' => $groups]);
     }

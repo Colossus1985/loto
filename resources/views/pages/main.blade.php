@@ -3,21 +3,27 @@
 <div class="px-5">
     <div class="mt-0">
         <div class="d-flex flex-row justify-content-between">
-
-            {{-- @foreach ($fonds as $fond )
-                <div class="d-flex flex-row">
-                    <h2 class="me-3 fw-bold">Fonds disponible :</h2>
-                    <h2 class="text-info fw-bold"> {{ number_format($fonds, 2) }} €</h2>
+            <div class="d-flex flex-column">
+                <div>
+                    <h2 class="fw-bold">Fonds disponibles :</h2> 
                 </div>
-            @endforeach --}}
-
-            <div class="d-flex flex-row">
-                <h2 class="me-3 fw-bold">Fonds disponible :</h2>
-                <h2 class="text-info fw-bold"> {{ number_format($fonds, 2) }} €</h2>
+                <div class="d-flex flex-column">
+                    @foreach ( $fonds as $fond )
+                        <div class="d-flex flex-row">
+                            <h3 class="me-3 fw-bold">{{ $fond['nameGroup'] }}</h3>
+                            <h3 class="text-info fw-bold"> {{ number_format($fond['fonds'], 2) }} €</h3>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             
+            {{-- <div class="d-flex flex-row">
+                <h2 class="me-3 fw-bold">Fonds disponible :</h2>
+                <h2 class="text-info fw-bold"> {{ number_format($fonds, 2) }} €</h2>
+            </div> --}}
+            
             <div class="d-flex flex-row">
-                <h2 class="me-3 fw-bold">Gain engendré(s) :</h2>
+                <h2 class="me-3 fw-bold">Gains engendré(s) :</h2>
                 <form action="{{ route('getGainHistory') }}">
                     <button tupe="submit" class="border border-3 btn btn-light py-0 mb-3">
                         <h2 class="text-info m-0 p-0 fw-bold"> {{ $sommeGain }} €</h2>

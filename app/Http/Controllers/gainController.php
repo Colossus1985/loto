@@ -12,14 +12,19 @@ class gainController extends Controller
 {
     public function addGain(Request $request)
     {
-        $arrayParticipantWin = $request->inputParticipantWinArray;
-        
+        // $arrayParticipantWin = $request->inputParticipantWinArray;
+        $nameGroup = $request->inputNameGroup;
+        $arrayParticipantWin = Participants::query()
+            ->where('nameGroup', '=', $nameGroup)
+            ->get();
+
         $gainValue = $request->inputAmount;
         $nbPersonnes = count($arrayParticipantWin);
         $gainIndividuel = bcdiv($gainValue, $nbPersonnes, 2); //downRounding 0.9999 = 0.99
 
         $gain = new Gains();
         $gain->amount = $gainValue;
+        $gain->nameGroup = $request->inputNameGroup;
         $gain->date = $request->inputDate;
         $gain->nbPersonnes = $nbPersonnes;
         $gain->gainIndividuel = $gainIndividuel;
