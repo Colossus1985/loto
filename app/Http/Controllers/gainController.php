@@ -80,22 +80,35 @@ class gainController extends Controller
         $gains = Gains::query()
             ->orderBy('date', 'desc')
             ->get();
-        
-        $sommeGains = 0.00;
-        if (count($gains) != 0) {
-            for ($i = 0; $i < count($gains); $i++) {
-                $sommeGains = $sommeGains + $gains[$i]->amount;
-            }
-            $sommeGains = number_format($sommeGains, 2);
-        }
 
         $groups = Groups::query()
             ->get();
-        
+
+        $arrayGainByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+                   
+                $gainGroup = Gains::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+    
+                $sommeGains = 0.00;
+                if (count($gainGroup) != 0) {
+                    for ($a = 0; $a < count($gainGroup); $a++) {
+                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
+                    }   
+                    $sommeGains = number_format($sommeGains, 2);
+                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
+                        
+                } 
+            }
+        }
+
         return view('pages.gains', [
             'gains' => $gains,
             'sommeGains' => $sommeGains,
             'participants' => $participants,
-            'groups' => $groups]);
+            'groups' => $groups,
+            'sommeGainsByGroups' => $arrayGainByGroup]);
     } 
 }

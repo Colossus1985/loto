@@ -17,42 +17,39 @@
             <div class="modal-body">
                 <form method="POST" action="{{ route('participantGroup') }}">
                     @csrf
-                    <div class="d-flex flex-row">
-                        <div class="form-group form-floating mb-3 me-3 d-flex flex-column">
-                            
-                            <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
-                                <div class="">
-                                    <p class="mt-1 mb-2 ps-3">Choisis le Group : </p>
-                                </div>
-                                @foreach ($groups as $group)
-                                    <div class="ms-3 form-check form-switch">
-                                        <input class="form-check-input me-3"
-                                            type="checkbox" 
-                                            name="inputNameGroup" 
-                                            role="switch" 
-                                            id="flexSwitchNameGroup" 
-                                            value="{{ $group->nameGroup }}">
-                                        <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
-                                    </div>
-                                @endforeach
+                    <div class="form-group form-floating mb-3 d-flex flex-row">
+                        <div class="border border-3 rounded-3 form-group form-floating me-3 d-flex flex-fill flex-column">
+                            <div class="">
+                                <p class="mt-1 mb-2 ps-3">Choisis le Group : </p>
                             </div>
+                             @foreach ($groups as $group)
+                                <div class="ms-3 form-check form-switch">
+                                    <input class="form-check-input me-3"
+                                        type="checkbox" 
+                                        name="inputNameGroup" 
+                                        role="switch" 
+                                        id="flexSwitchNameGroup" 
+                                        value="{{ $group->nameGroup }}">
+                                    <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
+                                </div>
+                            @endforeach
+                        </div>
 
-                            <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
-                                <div class="">
-                                    <p class="mt-1 mb-2 ps-3">Choisir le(s) Participant(s) : </p>
-                                </div>
-                                @foreach ($participants as $participant)
-                                    <div class="ms-3 form-check form-switch">
-                                        <input class="form-check-input me-3"
-                                            type="checkbox" 
-                                            name="inputParticipantArray[]" 
-                                            role="switch" 
-                                            id="flexSwitchCheckDefault" 
-                                            value="{{ $participant->pseudo }}">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">{{ $participant->pseudo}}</label>
-                                    </div>
-                                @endforeach
+                        <div class="border border-3 rounded-3 form-group form-floating d-flex flex-fill flex-column">
+                            <div class="">
+                                <p class="mt-1 mb-2 ps-3">Choisir le(s) Participant(s) : </p>
                             </div>
+                            @foreach ($participants as $participant)
+                                <div class="ms-3 form-check form-switch">
+                                    <input class="form-check-input me-3"
+                                        type="checkbox" 
+                                        name="inputParticipantArray[]" 
+                                        role="switch" 
+                                        id="flexSwitchCheckDefault" 
+                                        value="{{ $participant->pseudo }}">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ $participant->pseudo}}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
 

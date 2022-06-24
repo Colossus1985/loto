@@ -40,7 +40,7 @@ class participantController extends Controller
                 }
             }
         }
-// dd($arrayFondsByGroup);
+
         $arrayGainByGroup = [];
         if (count($groups) != 0) {
             for ($i = 0;  $i < count($groups) ; $i++) {
@@ -54,15 +54,12 @@ class participantController extends Controller
                     for ($a = 0; $a < count($gainGroup); $a++) {
                         $sommeGains = $sommeGains + $gainGroup[$a]->amount;
                     }   
-// dd(count($gainGroup));
                     $sommeGains = number_format($sommeGains, 2);
                     array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
                     
                 } 
             }
         }
-
-        
 
         return view('pages.main', [
             'participants' => $participants, 
@@ -76,16 +73,27 @@ class participantController extends Controller
         $pseudo = $request->inputPseudo;
         $email = $request->inputEmail;
 
-        $participantExist = Participants::query()
+        if ($email == null || $email == "") {
+            $participantExist = Participants::query()
             ->where('pseudo', '=', $pseudo)
-            ->orWhere('email', '=', $email)
             ->get();
-
-        if (count($participantExist) != 0) {
-            return redirect()->back()
-                ->with('error', $pseudo.' ou '.$email.' déjà existant!');
+            
+            if (count($participantExist) != 0) {
+                return redirect()->back()
+                    ->with('error', $pseudo.' déjà existant!');
+            }
+        } else {
+            $participantExist = Participants::query()
+            ->where('pseudo', '=', $pseudo)
+            ->where('email', '=', $email)
+            ->get();
+            
+            if (count($participantExist) != 0) {
+                return redirect()->back()
+                    ->with('error', $pseudo.' ou '.$email.' déjà existant!');
+            }
         }
-
+        
         $participant = new Participants();
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;

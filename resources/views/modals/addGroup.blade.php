@@ -17,22 +17,18 @@
             <div class="modal-body">
                 <form method="POST" action="{{ route('addGroup') }}">
                     @csrf
-                    <div class="d-flex flex-row">
-                        <div class="form-group form-floating mb-3 me-3 d-flex flex-column">
-                            <div class="form-group form-floating mb-3 d-flex flex-fill">
-                                <input
-                                    type="text"
-                                    class="form-control flex-fill"
-                                    name="inputNameGroup"
-                                    id="floatingNameGroup"
-                                    value="{{ old('inputAmount') }}"
-                                    maxlength="20"
-                                    placeholder="Nom du Groupe"
-                                    required
-                                />
-                                <label for="floatingNameGroup">Nom du Groupe</label>
-                            </div>
-                        </div>
+                    <div class="form-group form-floating mb-3 d-flex flex-fill">
+                        <input
+                        type="text"
+                        class="form-control flex-fill"
+                        name="inputNameGroup"
+                        id="floatingNameGroup"
+                        value="{{ old('inputAmount') }}"
+                        maxlength="20"
+                        placeholder="Nom du Groupe"
+                        required
+                        />
+                        <label for="floatingNameGroup">Nom du Groupe</label>
                     </div>
 
                     <div class="d-flex btn-G-L justify-content-end">
