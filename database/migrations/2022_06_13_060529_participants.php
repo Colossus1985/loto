@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lastName');
             $table->string('nameGroup')->nullable();
             $table->string('pseudo')->unique();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('tel');
             $table->float('amount')->nullable();
             $table->float('totalAmount')->nullable();

@@ -39,7 +39,7 @@
                                     class="form-control flex-fill"
                                     name="inputDate"
                                     id="floatingDate"
-                                    value="{{ old('inputDate') }}"
+                                    value="{{ date('d/m/Y') }}"
                                     placeholder="gain"
                                     required
                                 />
@@ -70,7 +70,6 @@
                                         name="inputNameGroup" 
                                         role="switch" 
                                         id="flexSwitchNameGroup" 
-                                        checked
                                         value="{{ $group->nameGroup }}">
                                     <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup}}</label>
                                 </div>

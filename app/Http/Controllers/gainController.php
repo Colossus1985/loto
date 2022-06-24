@@ -12,6 +12,7 @@ class gainController extends Controller
 {
     public function addGain(Request $request)
     {
+        
         // $arrayParticipantWin = $request->inputParticipantWinArray;
         $nameGroup = $request->inputNameGroup;
         $arrayParticipantWin = Participants::query()
@@ -34,10 +35,9 @@ class gainController extends Controller
         if ($addMoney === "true") {
             for ($i = 0; $i < count($arrayParticipantWin); $i++) {
                 $participant = Participants::query()
-                    ->where('pseudo', '=', $arrayParticipantWin[$i])
+                    ->where('pseudo', '=', $arrayParticipantWin[$i]->pseudo)
                     ->get();
                 $idParticipant = $participant[0]->id;
-                
                 $pseudo = $participant[0]->pseudo;
 
                 $money = Money::query()

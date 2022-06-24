@@ -30,31 +30,44 @@ class participantController extends Controller
 
                 $fonds = 0.00;
                 if (count($participantOfGroup) != 0) {
-                    for ($a = 0;  $a < count($participantOfGroup) ; $a++) {
+                    for ($a = 0;  $a < count($participantOfGroup); $a++) {
                         $fonds = $fonds + $participantOfGroup[$a]->amount;
                     }
+
                     $fonds = number_format($fonds, 2);
                     array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
                     
                 }
             }
         }
+// dd($arrayFondsByGroup);
+        $arrayGainByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+               
+                $gainGroup = Gains::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
 
-        $gains = Gains::query()
-            ->get();
-
-        $sommeGains = 0.00;
-        if (count($gains) != 0) {
-            for ($i = 0; $i < count($gains); $i++) {
-                $sommeGains = $sommeGains + $gains[$i]->amount;
+                $sommeGains = 0.00;
+                if (count($gainGroup) != 0) {
+                    for ($a = 0; $a < count($gainGroup); $a++) {
+                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
+                    }   
+// dd(count($gainGroup));
+                    $sommeGains = number_format($sommeGains, 2);
+                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
+                    
+                } 
             }
-            $sommeGains = number_format($sommeGains, 2);
         }
+
+        
 
         return view('pages.main', [
             'participants' => $participants, 
             'fonds' => $arrayFondsByGroup, 
-            'sommeGain' => $sommeGains,
+            'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
 
