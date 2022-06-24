@@ -12,14 +12,20 @@ class gainController extends Controller
 {
     public function addGain(Request $request)
     {
-        $arrayParticipantWin = $request->inputParticipantWinArray;
         
+        // $arrayParticipantWin = $request->inputParticipantWinArray;
+        $nameGroup = $request->inputNameGroup;
+        $arrayParticipantWin = Participants::query()
+            ->where('nameGroup', '=', $nameGroup)
+            ->get();
+
         $gainValue = $request->inputAmount;
         $nbPersonnes = count($arrayParticipantWin);
         $gainIndividuel = bcdiv($gainValue, $nbPersonnes, 2); //downRounding 0.9999 = 0.99
 
         $gain = new Gains();
         $gain->amount = $gainValue;
+        $gain->nameGroup = $request->inputNameGroup;
         $gain->date = $request->inputDate;
         $gain->nbPersonnes = $nbPersonnes;
         $gain->gainIndividuel = $gainIndividuel;
@@ -29,10 +35,9 @@ class gainController extends Controller
         if ($addMoney === "true") {
             for ($i = 0; $i < count($arrayParticipantWin); $i++) {
                 $participant = Participants::query()
-                    ->where('pseudo', '=', $arrayParticipantWin[$i])
+                    ->where('pseudo', '=', $arrayParticipantWin[$i]->pseudo)
                     ->get();
                 $idParticipant = $participant[0]->id;
-                
                 $pseudo = $participant[0]->pseudo;
 
                 $money = Money::query()
@@ -75,22 +80,35 @@ class gainController extends Controller
         $gains = Gains::query()
             ->orderBy('date', 'desc')
             ->get();
-        
-        $sommeGains = 0.00;
-        if (count($gains) != 0) {
-            for ($i = 0; $i < count($gains); $i++) {
-                $sommeGains = $sommeGains + $gains[$i]->amount;
-            }
-            $sommeGains = number_format($sommeGains, 2);
-        }
 
         $groups = Groups::query()
             ->get();
-        
+
+        $arrayGainByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+                   
+                $gainGroup = Gains::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+    
+                $sommeGains = 0.00;
+                if (count($gainGroup) != 0) {
+                    for ($a = 0; $a < count($gainGroup); $a++) {
+                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
+                    }   
+                    $sommeGains = number_format($sommeGains, 2);
+                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
+                        
+                } 
+            }
+        }
+
         return view('pages.gains', [
             'gains' => $gains,
             'sommeGains' => $sommeGains,
             'participants' => $participants,
-            'groups' => $groups]);
+            'groups' => $groups,
+            'sommeGainsByGroups' => $arrayGainByGroup]);
     } 
 }

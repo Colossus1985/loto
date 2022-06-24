@@ -15,37 +15,56 @@ class participantController extends Controller
     public function home()
     {
         $participants = Participants::query()
-            ->get();
-
-        $groups = Groups::query()
-            ->get();
-            
-        $fonds = 0.00;
-        if (count($participants) != 0) {
-            for ($i = 0;  $i < count($participants) ; $i++) {
-                $fonds = $fonds + $participants[$i]->amount;
-            }
-            $fonds = number_format($fonds, 2);
-        }
-
-        $gains = Gains::query()
-            ->get();
-
-        $sommeGains = 0.00;
-        if (count($gains) != 0) {
-            for ($i = 0; $i < count($gains); $i++) {
-                $sommeGains = $sommeGains + $gains[$i]->amount;
-            }
-            $sommeGains = number_format($sommeGains, 2);
-        }
-
-        $groups = Groups::query()
+            ->orderBy('nameGroup', 'asc')
             ->get();
         
+        $groups = Groups::query()
+            ->get();
+
+        $arrayFondsByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+                $participantOfGroup = Participants::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $fonds = 0.00;
+                if (count($participantOfGroup) != 0) {
+                    for ($a = 0;  $a < count($participantOfGroup); $a++) {
+                        $fonds = $fonds + $participantOfGroup[$a]->amount;
+                    }
+
+                    $fonds = number_format($fonds, 2);
+                    array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
+                    
+                }
+            }
+        }
+
+        $arrayGainByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+               
+                $gainGroup = Gains::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $sommeGains = 0.00;
+                if (count($gainGroup) != 0) {
+                    for ($a = 0; $a < count($gainGroup); $a++) {
+                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
+                    }   
+                    $sommeGains = number_format($sommeGains, 2);
+                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
+                    
+                } 
+            }
+        }
+
         return view('pages.main', [
             'participants' => $participants, 
-            'fonds' => $fonds, 
-            'sommeGain' => $sommeGains,
+            'fonds' => $arrayFondsByGroup, 
+            'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
 
@@ -54,16 +73,27 @@ class participantController extends Controller
         $pseudo = $request->inputPseudo;
         $email = $request->inputEmail;
 
-        $participantExist = Participants::query()
+        if ($email == null || $email == "") {
+            $participantExist = Participants::query()
             ->where('pseudo', '=', $pseudo)
-            ->orWhere('email', '=', $email)
             ->get();
-
-        if (count($participantExist) != 0) {
-            return redirect()->back()
-                ->with('error', $pseudo.' ou '.$email.' déjà existant!');
+            
+            if (count($participantExist) != 0) {
+                return redirect()->back()
+                    ->with('error', $pseudo.' déjà existant!');
+            }
+        } else {
+            $participantExist = Participants::query()
+            ->where('pseudo', '=', $pseudo)
+            ->where('email', '=', $email)
+            ->get();
+            
+            if (count($participantExist) != 0) {
+                return redirect()->back()
+                    ->with('error', $pseudo.' ou '.$email.' déjà existant!');
+            }
         }
-
+        
         $participant = new Participants();
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;

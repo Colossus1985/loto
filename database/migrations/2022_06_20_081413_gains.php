@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('gains', function (Blueprint $table) {
             $table->id();
             $table->float('amount')->default(0.00);
+            $table->string('nameGroup');
             $table->date('date');
             $table->integer('nbPersonnes');
             $table->float('gainIndividuel');

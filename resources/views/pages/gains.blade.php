@@ -3,9 +3,18 @@
 <div class="px-5">
     <div class="mt-0">
         <div class="d-flex flex-row justify-content-between mb-3">
-            <div class="d-flex flex-row">
-                <h2 class="me-3 fw-bold">Gains gagné : </h2>
-                <h2 class="text-info fw-bold"> {{ $sommeGains }} €</h2>
+            <div class="d-flex flex-column">
+                <div>
+                    <h2 class="fw-bold">Sommes des gains :</h2> 
+                </div>
+                <div class="d-flex flex-column">
+                    @foreach ( $sommeGainsByGroups as $sommeGainsByGroup )
+                        <div class="d-flex flex-row">
+                            <h3 class="me-3 fw-bold">{{ $sommeGainsByGroup['nameGroup'] }}</h3>
+                            <h3 class="text-info fw-bold"> {{ number_format($sommeGainsByGroup['sommeGains'], 2) }} €</h3>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <div class="d-flex flex-row">
                 <h2 class="me-3">🥳🥳🥳🥳🥳🥳</h2>
@@ -18,6 +27,7 @@
         </div>
         <table class="table table-bordered">
             <tr class="bg-light text-center fs-4">
+                <th>Groupe</th>
                 <th class="">Gain</th>
                 <th>Gain individuel</th>
                 <th>Date</th>
@@ -25,6 +35,7 @@
             </tr>
             @foreach ($gains as $gain)
                 <tr>
+                    <td>{{ $gain->nameGroup }}</td>
                     <td class="text-end align-middle fw-bold">
                         <span>{{ number_format($gain->amount, 2) }} €</span>
                     </td>

@@ -30,8 +30,8 @@ class groupsController extends Controller
     public function participantGroup(Request $request)
     {
         $nameGroup = $request->inputNameGroup;
-        $arrayParticipant = $request->inputParticipantWinArray;
-
+        $arrayParticipant = $request->inputParticipantArray;
+// dd($arrayParticipant);
         for ($i = 0; $i < count($arrayParticipant); $i++) {
             $participant = Participants::query()
                 ->where('pseudo', '=', $arrayParticipant[$i])

@@ -24,7 +24,7 @@
                     </div>
                     
                     <div class="form-group form-floating mb-3 d-flex">
-                        <input type="email" class="form-control flex-fill" name="inputEmail" id="floatingEmail" value="{{ old('inputEmail') }}" placeholder="name@example.com" required>
+                        <input type="email" class="form-control flex-fill" name="inputEmail" id="floatingEmail" value="{{ old('inputEmail') }}" placeholder="name@example.com">
                         <label for="floatingEmail">Email address</label>
                     </div>
 
