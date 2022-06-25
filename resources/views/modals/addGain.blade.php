@@ -66,7 +66,7 @@
                             @foreach ($groups as $group)
                                 <div class="ms-3 form-check form-switch">
                                     <input class="form-check-input me-3"
-                                        type="checkbox" 
+                                        type="radio" 
                                         name="inputNameGroup" 
                                         role="switch" 
                                         id="flexSwitchNameGroup" 

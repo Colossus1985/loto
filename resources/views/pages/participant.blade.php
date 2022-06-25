@@ -34,11 +34,31 @@
                     value="{{ $participant[0]->email }}">
                 <label for="floatingEmail" class="text-nowrap">Email</label>
             </div>
-            <div class="form-group form-floating mb-3 d-flex flex-fill">
-                <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroup"
-                    value="{{ $participant[0]->nameGroup }}">
-                <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
+            <div class="d-flex flex-row mb-3 ">
+                <div class="form-group form-floating d-flex flex-fill me-3">
+                    <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
+                        value="{{ $participant[0]->nameGroup }}">
+                    <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
+                </div>
+                <div class="border border-3 rounded-3 form-group form-floating d-flex flex-fill flex-column text-nowrap p-2">
+                    <div class="">
+                        <p class="mt-1 mb-2 ps-3">Changer le Group : </p>
+                    </div>
+                    @foreach ($groups as $group)
+                        <div class="ms-3 form-check form-switch">
+                            <input class="form-check-input me-3"
+                                type="radio" 
+                                name="inputNameGroupNew" 
+                                role="switch" 
+                                id="flexSwitchNameGroup" 
+                                value="{{ $group->nameGroup }}">
+                            <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
+                        </div>
+                    @endforeach
+                </div>
+                
             </div>
+            
         </div>
 
         <div class="d-flex flex-row">
