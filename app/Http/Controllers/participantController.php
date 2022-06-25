@@ -138,11 +138,17 @@ class participantController extends Controller
     public function updateParticipant(Request $request, $idParticipant)
     {
         $pseudo = $request->inputPseudo;
+        $inputNameGroupNew = $request->inputNameGroupNew;
+        if ($inputNameGroupNew == null || $inputNameGroupNew == "") {
+            $inputNameGroup = $request->inputNameGroupOld;
+        } else {
+            $inputNameGroup = $inputNameGroupNew;
+        }
         
         $participant = Participants::find($idParticipant);
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;
-        $participant->nameGroup = $request->inputNameGroup;
+        $participant->nameGroup = $inputNameGroup;
         $participant->pseudo = $request->inputPseudo;
         $participant->email = $request->inputEmail;
         $participant->tel = $request->inputTel;
