@@ -86,16 +86,21 @@ class moneyController extends Controller
 
     public function debitAll(Request $request)
     {
-        $arrayParticipantWin = $request->inputParticipantWinArray;
+        $nameGroup = $request->inputNameGroup;
+
+        $arrayParticipant = Participants::query()
+            ->where('nameGroup', '=', $nameGroup)
+            ->get();
 
         $debitValue = $request->inputAmount;
-        $nbPersonnes = count($arrayParticipantWin);
+        $nbPersonnes = count($arrayParticipant);
         $debitIndividuel = bcdiv($debitValue, $nbPersonnes, 2); //downRounding 0.9999 = 0.99
         
-        for ($i = 0; $i < count($arrayParticipantWin); $i++) {
+        for ($i = 0; $i < count($arrayParticipant); $i++) {
             $participant = Participants::query()
-                ->where('pseudo', '=', $arrayParticipantWin[$i])
+                ->where('pseudo', '=', $arrayParticipant[$i]->pseudo)
                 ->get();
+            // dd($participant);
             $idParticipant = $participant[0]->id;
                 
             $pseudo = $participant[0]->pseudo;
@@ -124,7 +129,7 @@ class moneyController extends Controller
         }
 
         return redirect()->back()
-            ->with('success', $debit.' € retiré des comptes des Participant');
+            ->with('success', $debit.' € retiré du(des) compte(s) du(des) Participant(s)');
     }
         
 }
