@@ -35,19 +35,18 @@
                             </div>
                         </div>
                         <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
-                            <div class="form-check form-switch">
-                                <p class="mb-0">Choisir le(s) Participant(s) : </p>
+                            <div class="">
+                                <p class="mt-1 mb-2 ps-3">Choisis le Group : </p>
                             </div>
-                            @foreach ($participants as $participant)
+                             @foreach ($groups as $group)
                                 <div class="ms-3 form-check form-switch">
-                                    <input class="form-check-input"
+                                    <input class="form-check-input me-3"
                                         type="checkbox" 
-                                        name="inputParticipantWinArray[]" 
+                                        name="inputNameGroup" 
                                         role="switch" 
-                                        id="flexSwitchCheckDefault" 
-                                        checked
-                                        value="{{ $participant->pseudo }}">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ $participant->pseudo}}</label>
+                                        id="flexSwitchNameGroup" 
+                                        value="{{ $group->nameGroup }}">
+                                    <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
                                 </div>
                             @endforeach
                         </div>
