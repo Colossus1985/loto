@@ -24,7 +24,7 @@ class groupsController extends Controller
         $group->save();
 
         return redirect()->back()
-            ->with('success', 'Le groupe '.$nameGroup.' à été crée avec succès!');
+            ->with('success', 'Le groupe "'.$nameGroup.'" à été crée avec succès!');
     }
 
     public function participantGroup(Request $request)

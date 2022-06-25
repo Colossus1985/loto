@@ -180,49 +180,64 @@ class participantController extends Controller
     public function searchParticipant(Request $request)
     {
         $userSearched = trim($request -> get('inputParticipant'));
-        $participantSearched = Participants::query()
-            ->where('pseudo', 'like', "%{$userSearched}%")
-            ->orWhere('email', 'like', "%{$userSearched}%")
-            ->orderBy('created_at', 'ASC')
-            ->get();
         
         $participants = Participants::query()
             ->where('pseudo', 'like', "%{$userSearched}%")
-            ->orWhere('email', 'like', "%{$userSearched}%")
             ->orderBy('created_at', 'ASC')
             ->get();
 
-        $fonds = 0.00;
-        if (count($participants) != 0) {
-            for ($i = 0;  $i < count($participants) ; $i++) {
-                $fonds = $fonds + $participants[$i]->amount;
-            }
-            $fonds = number_format($fonds, 2);
-        }
-    
-        $gains = Gains::query()
-            ->get();
-    
-        $sommeGains = 0.00;
-        if (count($gains) != 0) {
-            for ($i = 0; $i < count($gains); $i++) {
-                $sommeGains = $sommeGains + $gains[$i]->amount;
-            }
-            $sommeGains = number_format($sommeGains, 2);
-        }
-
-        if (count($participantSearched) == 0) {
+        if (count($participants) == 0) {
             return redirect()->route('home')
-                ->with('error', 'il n\'y pas de Pseudo ou email contenant "'.$userSearched.'"');
+                ->with('error', 'il n\'y pas de Pseudo contenant "'.$userSearched.'"');
         }
 
         $groups = Groups::query()
             ->get();
 
+        $arrayFondsByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+                $participantOfGroup = Participants::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $fonds = 0.00;
+                if (count($participantOfGroup) != 0) {
+                    for ($a = 0;  $a < count($participantOfGroup); $a++) {
+                        $fonds = $fonds + $participantOfGroup[$a]->amount;
+                    }
+
+                    $fonds = number_format($fonds, 2);
+                    array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
+                    
+                }
+            }
+        }
+
+        $arrayGainByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+               
+                $gainGroup = Gains::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $sommeGains = 0.00;
+                if (count($gainGroup) != 0) {
+                    for ($a = 0; $a < count($gainGroup); $a++) {
+                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
+                    }   
+                    $sommeGains = number_format($sommeGains, 2);
+                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
+                    
+                } 
+            }
+        }
+
         return view('pages.main', [
             'participants' => $participants, 
-            'fonds' => $fonds, 
-            'sommeGain' => $sommeGains,
+            'fonds' => $arrayFondsByGroup, 
+            'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
     
