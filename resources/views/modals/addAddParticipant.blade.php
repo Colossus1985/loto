@@ -32,6 +32,22 @@
                         <input type="text" class="form-control flex-fill" name="inputTel" id="floatingTel" value="{{ old('inputTel') }}" placeholder="Phone number" required>
                         <label for="floatingTel">Phone number</label>
                     </div>
+                    <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
+                        <div class="">
+                            <p class="mt-1 mb-2 ps-3">Choisis le Group : </p>
+                        </div>
+                         @foreach ($groups as $group)
+                            <div class="ms-3 form-check form-switch">
+                                <input class="form-check-input me-3"
+                                    type="checkbox" 
+                                    name="inputNameGroup" 
+                                    role="switch" 
+                                    id="flexSwitchNameGroup" 
+                                    value="{{ $group->nameGroup }}">
+                                <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
+                            </div>
+                        @endforeach
+                    </div>
                     <div class="d-flex btn-G-L d-flex justify-content-end">
                         <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#modalLogin" style="width: 45%;">Ajouter</button>
                     </div>

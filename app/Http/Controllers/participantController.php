@@ -97,6 +97,7 @@ class participantController extends Controller
         $participant = new Participants();
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;
+        $participant->nameGroup = $request->inputNameGroup;
         $participant->pseudo = $pseudo;
         $participant->email = $email;
         $participant->tel = $request->inputTel;
@@ -114,7 +115,7 @@ class participantController extends Controller
         $money->save();
 
         return redirect()->back()
-            ->with('success', $pseudo.' fait parti de ton groupe!');
+            ->with('success', '"'.$pseudo.'" enregistré(e)!');
     }
 
     public function participantDelete($idParticipant)
