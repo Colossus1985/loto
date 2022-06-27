@@ -94,7 +94,11 @@
                     <td class="text-end fw-bold bg-dark text-white">
                         {{ number_format($action->amount, 2) }} €
                     </td>
-                @elseif (($action->amount >= 0 && $action->amount <= 3.49) || $action->amount == null)
+                @elseif ($action->amount == 0.00 || $action->amount == null)
+                    <td class="text-end fw-bold bg-light">
+                        {{ number_format($action->amount, 2) }} €
+                    </td>
+                @elseif ($action->amount >= 0.01 && $action->amount <= 3.49 )
                     <td class="text-end fw-bold bg-danger">
                         {{ number_format($action->amount, 2) }} €
                     </td>
