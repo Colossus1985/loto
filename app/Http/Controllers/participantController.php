@@ -9,6 +9,7 @@ use App\Models\Participants;
 use Egulias\EmailValidator\Parser\PartParser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Null_;
 
 class participantController extends Controller
 {
@@ -21,45 +22,8 @@ class participantController extends Controller
         $groups = Groups::query()
             ->get();
 
-        $arrayFondsByGroup = [];
-        if (count($groups) != 0) {
-            for ($i = 0;  $i < count($groups) ; $i++) {
-                $participantOfGroup = Participants::query()
-                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
-                    ->get();
-
-                $fonds = 0.00;
-                if (count($participantOfGroup) != 0) {
-                    for ($a = 0;  $a < count($participantOfGroup); $a++) {
-                        $fonds = $fonds + $participantOfGroup[$a]->amount;
-                    }
-
-                    $fonds = number_format($fonds, 2);
-                    array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
-                    
-                }
-            }
-        }
-
-        $arrayGainByGroup = [];
-        if (count($groups) != 0) {
-            for ($i = 0;  $i < count($groups) ; $i++) {
-               
-                $gainGroup = Gains::query()
-                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
-                    ->get();
-
-                $sommeGains = 0.00;
-                if (count($gainGroup) != 0) {
-                    for ($a = 0; $a < count($gainGroup); $a++) {
-                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
-                    }   
-                    $sommeGains = number_format($sommeGains, 2);
-                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
-                    
-                } 
-            }
-        }
+        $arrayFondsByGroup = $this->fonds($groups);
+        $arrayGainByGroup = $this->gains($groups);
 
         return view('pages.main', [
             'participants' => $participants, 
@@ -139,8 +103,10 @@ class participantController extends Controller
     {
         $pseudo = $request->inputPseudo;
         $inputNameGroupNew = $request->inputNameGroupNew;
-        if ($inputNameGroupNew == null || $inputNameGroupNew == "") {
+        if  ($inputNameGroupNew == "" || $inputNameGroupNew == Null) {
             $inputNameGroup = $request->inputNameGroupOld;
+        } elseif ($inputNameGroupNew == "null") {
+            $inputNameGroup = Null;
         } else {
             $inputNameGroup = $inputNameGroupNew;
         }
@@ -177,10 +143,15 @@ class participantController extends Controller
         $groups = Groups::query()
             ->get();
 
+        $arrayFondsByGroup = $this->fonds($groups);
+        $arrayGainByGroup = $this->gains($groups);
+
         return view('pages.participant', 
             ['participant' => $participant, 
             'actions' => $money, 
             'participants' => $participants,
+            'fonds' => $arrayFondsByGroup,
+            'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
 
@@ -201,25 +172,8 @@ class participantController extends Controller
         $groups = Groups::query()
             ->get();
 
-        $arrayFondsByGroup = [];
-        if (count($groups) != 0) {
-            for ($i = 0;  $i < count($groups) ; $i++) {
-                $participantOfGroup = Participants::query()
-                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
-                    ->get();
-
-                $fonds = 0.00;
-                if (count($participantOfGroup) != 0) {
-                    for ($a = 0;  $a < count($participantOfGroup); $a++) {
-                        $fonds = $fonds + $participantOfGroup[$a]->amount;
-                    }
-
-                    $fonds = number_format($fonds, 2);
-                    array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
-                    
-                }
-            }
-        }
+        $arrayFondsByGroup = $this->fonds($groups);
+        
 
         $arrayGainByGroup = [];
         if (count($groups) != 0) {
@@ -247,5 +201,56 @@ class participantController extends Controller
             'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
+
+    public function fonds($groups)
+    {
+        $arrayFondsByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+                $participantOfGroup = Participants::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $fonds = 0.00;
+                if (count($participantOfGroup) != 0) {
+                    for ($a = 0;  $a < count($participantOfGroup); $a++) {
+                        $fonds = $fonds + $participantOfGroup[$a]->amount;
+                    }
+
+                    $fonds = number_format($fonds, 2);
+                    array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
+                    
+                }
+            }
+        }
+        return $arrayFondsByGroup;
+    }
+
+    public function gains($groups)
+    {
+        $arrayGainByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+               
+                $gainGroup = Gains::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $sommeGains = 0.00;
+                if (count($gainGroup) != 0) {
+                    for ($a = 0; $a < count($gainGroup); $a++) {
+                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
+                    }   
+                    $sommeGains = number_format($sommeGains, 2);
+                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
+                    
+                } 
+            }
+        }
+        return $arrayGainByGroup;
+    }
     
 }
+
+
+

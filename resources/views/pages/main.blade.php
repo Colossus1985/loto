@@ -2,7 +2,7 @@
 @section('content')
 <div class="px-5">
     <div class="mt-0">
-        <div class="d-flex flex-row justify-content-between">
+        {{-- <div class="d-flex flex-row justify-content-between">
             <div class="d-flex flex-column">
                 <div>
                     <h2 class="fw-bold">Fonds disponibles :</h2> 
@@ -30,7 +30,7 @@
                     @endforeach
                 </div>
             </div>
-        </div>
+        </div> --}}
         <table class="table table-bordered">
             <tr class="bg-light text-center fs-4">
                 <th>Groupe</th>
