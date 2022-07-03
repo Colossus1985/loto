@@ -44,8 +44,17 @@
                     <div class="">
                         <p class="mt-1 mb-2 ps-3">Changer le Group : </p>
                     </div>
+                    <div class="ms-1 form-check form-switch bg-warning rounded-2">
+                        <input class="form-check-input me-3"
+                            type="radio" 
+                            name="inputNameGroupNew" 
+                            role="switch" 
+                            id="flexSwitchNameGroup" 
+                            value="null">
+                        <label class="form-check-label" for="flexSwitchNameGroup">pas de groupe</label>
+                    </div>
                     @foreach ($groups as $group)
-                        <div class="ms-3 form-check form-switch">
+                        <div class="ms-1 form-check form-switch">
                             <input class="form-check-input me-3"
                                 type="radio" 
                                 name="inputNameGroupNew" 
