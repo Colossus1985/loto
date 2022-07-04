@@ -84,6 +84,8 @@ class gainController extends Controller
         $groups = Groups::query()
             ->get();
 
+        $arrayFondsByGroup = $this->fonds($groups);
+
         $arrayGainByGroup = [];
         if (count($groups) != 0) {
             for ($i = 0;  $i < count($groups) ; $i++) {
@@ -109,6 +111,55 @@ class gainController extends Controller
             'sommeGains' => $sommeGains,
             'participants' => $participants,
             'groups' => $groups,
+            'fonds' => $arrayFondsByGroup,
             'sommeGainsByGroups' => $arrayGainByGroup]);
     } 
+
+    public function fonds($groups)
+    {
+        $arrayFondsByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+                $participantOfGroup = Participants::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $fonds = 0.00;
+                if (count($participantOfGroup) != 0) {
+                    for ($a = 0;  $a < count($participantOfGroup); $a++) {
+                        $fonds = $fonds + $participantOfGroup[$a]->amount;
+                    }
+
+                    $fonds = number_format($fonds, 2);
+                    array_push($arrayFondsByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'fonds' => $fonds]);
+                    
+                }
+            }
+        }
+        return $arrayFondsByGroup;
+    }
+
+    public function gains($groups)
+    {
+        $arrayGainByGroup = [];
+        if (count($groups) != 0) {
+            for ($i = 0;  $i < count($groups) ; $i++) {
+               
+                $gainGroup = Gains::query()
+                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
+                    ->get();
+
+                $sommeGains = 0.00;
+                if (count($gainGroup) != 0) {
+                    for ($a = 0; $a < count($gainGroup); $a++) {
+                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
+                    }   
+                    $sommeGains = number_format($sommeGains, 2);
+                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
+                    
+                } 
+            }
+        }
+        return $arrayGainByGroup;
+    }
 }

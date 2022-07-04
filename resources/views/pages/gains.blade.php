@@ -3,7 +3,7 @@
 <div class="px-5">
     <div class="mt-0">
         <div class="d-flex flex-row justify-content-between mb-3">
-            <div class="d-flex flex-column">
+            {{-- <div class="d-flex flex-column">
                 <div>
                     <h2 class="fw-bold">Sommes des gains :</h2> 
                 </div>
@@ -15,9 +15,9 @@
                         </div>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
             <div class="d-flex flex-row">
-                <h2 class="me-3">🥳🥳🥳🥳🥳🥳</h2>
+                <h2 class="me-3">🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳</h2>
             </div>
             <div>
                 <button type="button" class="btn btn-light py-0 d-flex align-items-center border border-3" data-bs-toggle="modal" data-bs-target="#modalAddGain">

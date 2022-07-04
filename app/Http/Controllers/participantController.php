@@ -173,27 +173,7 @@ class participantController extends Controller
             ->get();
 
         $arrayFondsByGroup = $this->fonds($groups);
-        
-
-        $arrayGainByGroup = [];
-        if (count($groups) != 0) {
-            for ($i = 0;  $i < count($groups) ; $i++) {
-               
-                $gainGroup = Gains::query()
-                    ->where('nameGroup', '=', $groups[$i]->nameGroup)
-                    ->get();
-
-                $sommeGains = 0.00;
-                if (count($gainGroup) != 0) {
-                    for ($a = 0; $a < count($gainGroup); $a++) {
-                        $sommeGains = $sommeGains + $gainGroup[$a]->amount;
-                    }   
-                    $sommeGains = number_format($sommeGains, 2);
-                    array_push($arrayGainByGroup, ['nameGroup' => $groups[$i]->nameGroup, 'sommeGains' => $sommeGains]); 
-                    
-                } 
-            }
-        }
+        $arrayGainByGroup = $this->gains($groups);
 
         return view('pages.main', [
             'participants' => $participants, 
