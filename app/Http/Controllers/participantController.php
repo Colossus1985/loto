@@ -53,6 +53,10 @@ class participantController extends Controller
 
     public function addParticipant(Request $request)
     {
+        $request->validate([
+            
+        ]);
+
         $pseudo = $request->inputPseudo;
         $email = $request->inputEmail;
 
