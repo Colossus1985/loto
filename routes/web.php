@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\gainController;
 use App\Http\Controllers\groupsController;
+use App\Http\Controllers\logController;
 use App\Http\Controllers\moneyController;
 use App\Http\Controllers\participantController;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('', [participantController::class, 'home'])->name('home');
+Route::get('', [logController::class, 'logReg'])->name('logReg');
+Route::post('reg', [logController::class, 'register_action'])->name('register.action');
+Route::post('login', [logController::class, 'login_action'])->name('login.action');
+Route::get('logout', [logController::class, 'logout'])->name('logout');
+
+Route::get('home/{userId}', [participantController::class, 'home'])->name('home');
 Route::get('participant/{idParticipant}', [participantController::class, 'participant'])->name('participant');
 Route::post('addParticipant', [participantController::class, 'addParticipant'])->name('addParticipant');
 Route::get('participantDelete/{idParticipant}', [participantController::class, 'participantDelete'])->name('participantDelete');

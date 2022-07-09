@@ -55,9 +55,9 @@
                     @if ( $participant->amount < 0)
                         <td class="bg-dark fw-bold text-end text-white pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
                                     ➕</button>
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
                             {{ number_format($participant->amount, 2) }} €
@@ -65,9 +65,9 @@
                     @elseif ( $participant->amount == null || $participant->amount == 0)
                         <td class="bg-light fw-bold text-end pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
                                     ➕</button>
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
                             0.00 €
@@ -75,9 +75,9 @@
                     @elseif ( $participant->amount <= 3.49)
                         <td class="bg-danger fw-bold text-end pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
                                     ➕</button>
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
                             {{ number_format($participant->amount, 2) }} €
@@ -85,9 +85,9 @@
                     @elseif ( $participant->amount < 10 && $participant->amount >= 3.5)
                         <td class="bg-warning fw-bold text-end pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
                                     ➕</button>
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
                             {{ number_format($participant->amount, 2) }} €
@@ -95,9 +95,9 @@
                     @elseif ( $participant->amount >= 10)
                         <td class="bg-success fw-bold text-end pe-3 align-middle d-flex align-items-center justify-content-between">
                             <div class="d-flex flex-row">
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalAddMoney{{$participant->id}}">
                                     ➕</button>
-                                <button type="button" class="btn btn-light me-3" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
+                                <button type="button" class="btn btn-light me-3 border btnhover" data-bs-toggle="modal" data-bs-target="#modalDebitMoney{{$participant->id}}">
                                     ➖</button>
                             </div>
                             {{ number_format($participant->amount, 2) }} €
