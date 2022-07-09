@@ -21,6 +21,7 @@
     @include('modals.jouer')
     @include('modals.addGroup')
     @include('modals.participantGroup')
+    @include('modals.login')
     
     @yield('content')
     

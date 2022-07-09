@@ -7,29 +7,48 @@ use App\Models\Groups;
 use App\Models\Money;
 use App\Models\Participants;
 use Egulias\EmailValidator\Parser\PartParser;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Null_;
 
 class participantController extends Controller
 {
-    public function home()
+    public function home($userId)
     {
-        $participants = Participants::query()
+        if ($userId == "all") {
+            $participants = Participants::query()
             ->orderBy('nameGroup', 'asc')
             ->get();
         
-        $groups = Groups::query()
+            $groups = Groups::query()
+                ->get();
+
+            $arrayFondsByGroup = $this->fonds($groups);
+            $arrayGainByGroup = $this->gains($groups);
+
+            return view('pages.main', [
+                'participants' => $participants, 
+                'fonds' => $arrayFondsByGroup, 
+                'sommeGainsByGroups' => $arrayGainByGroup,
+                'groups' => $groups]);
+        } else {
+            $participants = Participants::query()
+            ->where('id', '=', $userId)
             ->get();
+        
+            $groups = Groups::query()
+                ->get();
 
-        $arrayFondsByGroup = $this->fonds($groups);
-        $arrayGainByGroup = $this->gains($groups);
+            $arrayFondsByGroup = $this->fonds($groups);
+            $arrayGainByGroup = $this->gains($groups);
 
-        return view('pages.main', [
-            'participants' => $participants, 
-            'fonds' => $arrayFondsByGroup, 
-            'sommeGainsByGroups' => $arrayGainByGroup,
-            'groups' => $groups]);
+            return view('pages.main', [
+                'participants' => $participants, 
+                'fonds' => $arrayFondsByGroup, 
+                'sommeGainsByGroups' => $arrayGainByGroup,
+                'groups' => $groups]);
+        }
+        
     }
 
     public function addParticipant(Request $request)
@@ -118,7 +137,14 @@ class participantController extends Controller
         $participant->pseudo = $request->inputPseudo;
         $participant->email = $request->inputEmail;
         $participant->tel = $request->inputTel;
-        $participant->save();
+
+        try {
+            $participant->save();
+        } catch (Exception $e){
+            return redirect()->back()
+                ->with('error', 'La mise à jour a échoué!');
+        }
+        
 
         return redirect()->back()
             ->with('success', $pseudo.' mis(e) à jour!');
@@ -126,13 +152,14 @@ class participantController extends Controller
     
     public function participant($idParticipant)
     {
+        
         $participants = Participants::query()
             ->get();
 
         $participant = Participants::query()
             ->where('id', '=', $idParticipant)
             ->get();
-
+            // dd($participant);
         // dd($participant[0]->totalAmount);
         $id_pseudo = $participant[0]->id;
         $money = Money::query()
@@ -181,6 +208,8 @@ class participantController extends Controller
             'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
+
+//####################################################################
 
     public function fonds($groups)
     {

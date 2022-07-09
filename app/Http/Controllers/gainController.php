@@ -104,6 +104,9 @@ class gainController extends Controller
                         
                 } 
             }
+        } else {
+            array_push($arrayGainByGroup, ['nameGroup' => "pas de groupe", 'sommeGains' => 0]);
+            $sommeGains = "";
         }
 
         return view('pages.gains', [
