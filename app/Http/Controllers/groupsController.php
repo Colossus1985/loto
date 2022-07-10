@@ -59,13 +59,13 @@ class groupsController extends Controller
         $arrayControles = [];
         $regexInputName = "/^(\s)*[A-Za-z0-9éèîôàêç@]+((\s)?((\'|\-|\.)?([A-Za-z0-9éèîôàêç@])*))*(\s)*$/";
 
-        $nameGroup = $request->inputTel;
+        $nameGroup = $request->inputNameGroup;
         if (!preg_match($regexInputName, $nameGroup)) {
-            array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le nom du group!"]);
+            array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le nom du groupe!"]);
             return $arrayControles;
         }
 
-//###---If all is alright, sending back 'true' with empty message---###
+//###---If all is alright, sending back true with empty message---###
         array_push($arrayControles, ['bool' => true, 'message' => ""]);
             return $arrayControles;
     }

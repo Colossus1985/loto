@@ -66,35 +66,10 @@
                         <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
                     @endif
                 </div>
-                <div class="border border-3 rounded-3 form-group form-floating d-flex flex-fill flex-column text-nowrap p-2">
-                    <div class="">
-                        <p class="mt-1 mb-2 ps-3">Changer le Group : </p>
-                    </div>
-                    <div class="ms-1 form-check form-switch bg-warning rounded-2">
-                        <input class="form-check-input me-3"
-                            type="radio" 
-                            name="inputNameGroupNew" 
-                            role="switch" 
-                            id="flexSwitchNameGroup" 
-                            value="null">
-                        <label class="form-check-label" for="flexSwitchNameGroup">pas de groupe</label>
-                    </div>
-                    @foreach ($groups as $group)
-                        <div class="ms-1 form-check form-switch">
-                            <input class="form-check-input me-3"
-                                type="radio" 
-                                name="inputNameGroupNew" 
-                                role="switch" 
-                                id="flexSwitchNameGroup" 
-                                value="{{ $group->nameGroup }}">
-                            <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
-                        </div>
-                    @endforeach
-                </div>
             </div>
             
         </div>
-            @if (Auth::user()->id == $participant[0]->id)
+        @if (Auth::user()->id == $participant[0]->id)
             <div class="d-flex flex-row">
                 <div class="form-group form-floating mb-3 me-3">
                     <input id="floatingPassword" type="password" maxlength="20" minlength="3" class="form-control ui-tooltip" title="entre 3 et 20 charactères" name="inputPasswordActuel"
@@ -112,8 +87,7 @@
                     <label for="floatingConfirmPassword">Confirm new Password</label>
                 </div>
             </div>
-                
-            @endif
+        @endif
         <div class="d-flex flex-row">
             <div class="form-group form-floating mb-3 me-3">
                 <input id="floatingAmount" class="form-control text-end fw-bold"
@@ -127,11 +101,52 @@
                 <label for="floatingAmount" class="text-nowrap">Joué</label>
             </div>
             
-            <div class="form-group form-floating flex-fill d-flex mb-3">
-                <button type="submit" class="btn btn-primary text-nowrap flex-fill">Enregistrer Changement</button>
-            </div>
+            @if (Auth::user()->id == $participant[0]->id )
+                <div class="form-group form-floating flex-fill d-flex mb-3">
+                    <button type="submit" class="btn btn-primary text-nowrap flex-fill">Enregistrer Changement</button>
+                </div>
+            @endif
+            
         </div>
     </form>
+    @if (Auth::user()->admin == 1)
+    <div>
+        <form action="{{ route('changeGroup', $participant[0]->id) }}">
+            <div class="border border-3 rounded-3 d-flex flex-column  p-2 mb-3 me-3">
+                <div class="">
+                    <p class="mt-1 mb-2 ps-3 text-nowrap">Changer le Group : </p>
+                </div>
+                <div class="d-flex flex-row text-wrap">
+                    <div class="ms-1 form-check form-switch bg-warning rounded-2 me-3 ps-1 text-nowrap">
+                        <input class="form-check-input me-3 ms-0"
+                            type="radio" 
+                            name="inputNameGroupNew" 
+                            role="switch" 
+                            id="flexSwitchNameGroup" 
+                            value="null">
+                        <label class="form-check-label me-2 text-nowrap" for="flexSwitchNameGroup">pas de groupe</label>
+                    </div>
+                    @foreach ($groups as $group)
+                        <div class="ms-1 form-check form-switch me-3">
+                            <input class="form-check-input me-2"
+                                type="radio" 
+                                name="inputNameGroupNew" 
+                                role="switch" 
+                                id="flexSwitchNameGroup" 
+                                value="{{ $group->nameGroup }}">
+                            <label class="form-check-label text-nowrap" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
+                        </div>
+                    @endforeach
+                </div>
+                
+            </div>
+            <div class="form-group form-floating d-flex mb-3">
+                <button type="submit" class="btn btn-primary text-nowrap">Changer groupe</button>
+            </div>
+        </form>
+    </div>
+        
+     @endif
 
     <table class="table table-bordered my-4">
         <tr class="bg-light text-center">
