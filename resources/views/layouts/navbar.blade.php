@@ -126,7 +126,7 @@
                         <div class="input-group ">
                             <input class="form-control me-1 mt-2" maxlength="15" name="inputParticipant" placeholder="Participant..."
                                 aria-label="Participant...">
-                            <button class="btn btn-outline-success ms-1 mt-2" type="submit">🔎</button>
+                            <button class="btn btn-outline-success ms-1 mt-2 ui-tooltip" title="chercher" type="submit">🔎</button>
                         </div>
                     </form>
                 @endif
@@ -155,7 +155,7 @@
                             </form>
                         </b>
                     </a>
-                    <a class="btn text-white mt-2 dropdown-item" href="{{ route('logout') }}">Logout</a>
+                    <a class="btn ui-tooltip" title="logout" href="{{ route('logout') }}">🚪</a>
                 @endif
             </div>
         @else

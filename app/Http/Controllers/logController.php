@@ -239,5 +239,10 @@ class logController extends Controller
             array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le pseudo!"]);
             return $arrayControles;
         }
+
+//###---If all is alright sending back 'true' with empty message---###
+
+        array_push($arrayControles, ['bool' => true, 'message' => ""]);
+            return $arrayControles;
     }
 }

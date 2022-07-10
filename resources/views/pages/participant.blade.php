@@ -6,19 +6,31 @@
         <div class="d-flex flex-row">
             <div class="form-group form-floating mb-3 me-3 d-flex flex-fill">
                 <input id="floatingfirstName" type="text" class="form-control flex-fill fw-bold" name="inputFirstName"
-                    value="{{ $participant[0]->firstName }}">
+                    value="{{ $participant[0]->firstName }}"
+                    @if (Auth::user()->id != $participant[0]->id)
+                        readonly
+                    @endif
+                    >
                 <label for="floatingfirstName" class="text-nowrap">First Name</label>
             </div>
 
             <div class="form-group form-floating mb-3 me-3 d-flex flex-fill">
                 <input id="floatinglastName" type="text" class="form-control flex-fill fw-bold" name="inputLastName"
-                    value="{{ $participant[0]->lastName }}">
+                    value="{{ $participant[0]->lastName }}"
+                    @if (Auth::user()->id != $participant[0]->id)
+                        readonly
+                    @endif
+                    >
                 <label for="floatinglastName" class="text-nowrap">Last Name</label>
             </div>
 
             <div class="form-group form-floating mb-3 d-flex flex-fill">
                 <input id="floatingpseudo" type="text" class="form-control flex-fill fw-bold" name="inputPseudo"
-                    value="{{ $participant[0]->pseudo }}">
+                    value="{{ $participant[0]->pseudo }}"
+                    @if (Auth::user()->id != $participant[0]->id)
+                        readonly
+                    @endif
+                    >
                 <label for="floatingpseudo" class="text-nowrap">Pseudo</label>
             </div>
         </div>
@@ -26,19 +38,33 @@
         <div class="d-flex flex-row">
             <div class="form-group form-floating mb-3 me-3">
                 <input id="floatingTel" type="text" class="form-control fw-bold" name="inputTel"
-                    value="{{ $participant[0]->tel }}">
+                    value="{{ $participant[0]->tel }}"
+                    @if (Auth::user()->id != $participant[0]->id)
+                        readonly
+                    @endif
+                    >
                 <label for="floatingTel" class="text-nowrap">Phone</label>
             </div>
             <div class="form-group form-floating mb-3 me-3 d-flex flex-fill">
                 <input id="floatingEmail" type="email" class="form-control flex-fill fw-bold" name="inputEmail"
-                    value="{{ $participant[0]->email }}">
+                    value="{{ $participant[0]->email }}"
+                    @if (Auth::user()->id != $participant[0]->id)
+                        readonly
+                    @endif
+                    >
                 <label for="floatingEmail" class="text-nowrap">Email</label>
             </div>
             <div class="d-flex flex-row mb-3 ">
                 <div class="form-group form-floating d-flex flex-fill me-3">
-                    <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
-                        value="{{ $participant[0]->nameGroup }}">
-                    <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
+                    @if ($participant[0]->nameGroup == null) 
+                        <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
+                            value="pas de groupe" readonly>
+                        <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
+                    @else
+                        <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
+                            value="{{ $participant[0]->nameGroup }}" readonly>
+                        <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
+                    @endif
                 </div>
                 <div class="border border-3 rounded-3 form-group form-floating d-flex flex-fill flex-column text-nowrap p-2">
                     <div class="">
@@ -65,11 +91,29 @@
                         </div>
                     @endforeach
                 </div>
-                
             </div>
             
         </div>
-
+            @if (Auth::user()->id == $participant[0]->id)
+            <div class="d-flex flex-row">
+                <div class="form-group form-floating mb-3 me-3">
+                    <input id="floatingPassword" type="password" maxlength="20" minlength="3" class="form-control ui-tooltip" title="entre 3 et 20 charactères" name="inputPasswordActuel"
+                        placeholder="Password" required>
+                    <label for="floatingPassword">actuel Password</label>
+                </div>
+                <div class="form-group form-floating mb-3 me-3">
+                    <input id="floatingPasswordNew" type="password" maxlength="20" minlength="3" class="form-control ui-tooltip" title="entre 3 et 20 charactères" name="inputPassword"
+                        placeholder="Password">
+                    <label for="floatingPasswordNew">new Password</label>
+                </div>
+                <div class="form-group form-floating mb-3">
+                    <input id="floatingConfirmPassword" type="password" maxlength="20" minlength="3" class="form-control ui-tooltip" title="entre 3 et 20 charactères"
+                        name="inputPassword_confirmation" placeholder="Confirm Password">
+                    <label for="floatingConfirmPassword">Confirm new Password</label>
+                </div>
+            </div>
+                
+            @endif
         <div class="d-flex flex-row">
             <div class="form-group form-floating mb-3 me-3">
                 <input id="floatingAmount" class="form-control text-end fw-bold"
