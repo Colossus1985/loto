@@ -114,7 +114,8 @@
     </form>
     @if (Auth::user()->admin == 1)
     <div>
-        <form action="{{ route('changeGroup', $participant[0]->id) }}">
+        <form action="{{ route('changeGroup', $participant[0]->id) }}" method = "POST">
+            @csrf
             <div class="border border-3 rounded-3 d-flex flex-column  ps-3 py-2 mb-3">
                 <div class="">
                     <p class="mt-1 mb-2 text-nowrap">Changer le Group : </p>

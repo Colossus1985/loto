@@ -265,6 +265,7 @@ class participantController extends Controller
 
     public function changeGroup(Request $request, $idParticipant)
     {
+        // dd($request);
         $participant = Participants::find($idParticipant);
         $participant->nameGroup = $request->inputNameGroupNew;
         try {
