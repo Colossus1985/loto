@@ -28,7 +28,7 @@
                         placeholder="Nom du Groupe"
                         required
                         />
-                        <label for="floatingNameGroup">Nom du Groupe</label>
+                        <label for="floatingNameGroup">Nom du Groupe aA-zZ 0-9</label>
                     </div>
 
                     <div class="d-flex btn-G-L justify-content-end">
