@@ -40,7 +40,7 @@
             </tr>
             @foreach ($participants as $participant)
                 <tr>
-                    @if ($participant->nameGroup == null || $participant->nameGroup == "")
+                    @if ($participant->nameGroup == null || $participant->nameGroup == "" || $participant->nameGroup == "null")
                         <td class="text_nowrap align-middle d-flex align-items-center justify-content-center">pas de groupe</td>
                     @else
                         <td class="text_nowrap align-middle d-flex align-items-center justify-content-center">{{ $participant->nameGroup }}</td>

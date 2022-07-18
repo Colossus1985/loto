@@ -59,9 +59,9 @@
                     @if (Auth::user()->admin == 1 && Auth::user()->id != $participant[0]->id) me-0
                     @else me-3
                     @endif">
-                    @if ($participant[0]->nameGroup == null) 
+                    @if ($participant[0]->nameGroup == null || $participant[0]->nameGroup == "null" || $participant[0]->nameGroup == "") 
                         <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
-                            value="pas de groupe" readonly>
+                            value="Pas de groupe" readonly>
                         <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
                     @else
                         <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
@@ -118,7 +118,7 @@
             @csrf
             <div class="border border-3 rounded-3 d-flex flex-column  ps-3 py-2 mb-3">
                 <div class="">
-                    <p class="mt-1 mb-2 text-nowrap">Changer le Group : </p>
+                    <p class="mt-1 mb-2 text-nowrap">Changer le Groupe : </p>
                 </div>
                 <div class="d-flex flex-row text-nowrap flex-wrap">
                     <div class="form-check form-switch bg-warning rounded-2 me-3 ps-1  text-nowrap">
@@ -128,7 +128,7 @@
                             role="switch" 
                             id="flexSwitchNameGroup" 
                             value="null">
-                        <label class="form-check-label me-2 text-nowrap" for="flexSwitchNameGroup">pas de groupe</label>
+                        <label class="form-check-label me-2 text-nowrap" for="flexSwitchNameGroup">Pas de groupe</label>
                     </div>
                     @foreach ($groups as $group)
                         <div class="ms-1 form-check form-switch me-3">

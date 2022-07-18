@@ -1,15 +1,19 @@
 <nav class="navbar navbar-expand-lg bg-info px-4 mb-4">
-    <div class="container-fluid">
+    <div class="container-fluid d-flex flex-row">
         @if (Auth::user())
-            @if (Auth::user()->admin == 1)
-                <a class="navbar-brand" href="{{ route('home', "all") }}">Home</a>
-            @elseif (Auth::user()->admin == 0)
-                <a class="navbar-brand" href="{{ route('home', Auth::user()->id) }}">Home</a>
-            @endif
+
+            <div class="d-flex flex-row">
+                @if (Auth::user()->admin == 1)
+                    <a class="navbar-brand" href="{{ route('home', "all") }}">Home</a>
+                @elseif (Auth::user()->admin == 0)
+                    <a class="navbar-brand" href="{{ route('home', Auth::user()->id) }}">Home</a>
+                @endif
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @if (Auth::user()->admin == 1)
@@ -132,6 +136,7 @@
                 @endif
                 
             </div>
+
             <div class="d-flex flex-row">
                 @if (!Auth::user()) 
                     <input type="submit" class="form-control me-2 btn btnhover"
@@ -158,6 +163,7 @@
                     <a class="btn ui-tooltip" title="logout" href="{{ route('logout') }}">🚪</a>
                 @endif
             </div>
+            
         @else
             <div class="d-flex justify-content-center align-items-center">
                 <h2>The Loto experience in group</h2> 

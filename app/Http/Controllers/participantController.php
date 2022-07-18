@@ -50,7 +50,6 @@ class participantController extends Controller
                 'sommeGainsByGroups' => $arrayGainByGroup,
                 'groups' => $groups]);
         }
-        
     }
 
     public function addParticipant(Request $request)
@@ -208,7 +207,7 @@ class participantController extends Controller
             ->where('id', '=', $idParticipant)
             ->get();
             // dd($participant);
-        // dd($participant[0]->totalAmount);
+        // dd($participant[0]->nameGroup);
         $id_pseudo = $participant[0]->id;
         $money = Money::query()
             ->where('id_pseudo', '=', $id_pseudo)
