@@ -1,11 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-info px-4 mb-4">
     <div class="container-fluid d-flex flex-row">
-        <img class="me-3 bg-warning rounded" src="/Images/LogoLoto.png">
+        
         @if (Auth::user())
 
             <div class="d-flex flex-row">
                 @if (Auth::user()->admin == 1)
-                    <a class="navbar-brand" href="{{ route('home', "all") }}"><h3>Home</h3></a>
+                    <a class="navbar-brand" href="{{ route('home', "all") }}">
+                        <img class="me-3 bg-warning rounded" src="/Images/LogoLoto.png">
+                    </a>
                 @elseif (Auth::user()->admin == 0)
                     <a class="navbar-brand" href="{{ route('home', Auth::user()->id) }}">Home</a>
                 @endif
