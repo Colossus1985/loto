@@ -20,12 +20,12 @@
             </div>
             
             <div class="form-group form-floating mb-3 d-flex">
-                <input type="email" class="form-control flex-fill" name="inputEmail" id="floatingEmail" value="{{ old('inputEmail') }}" placeholder="name@example.com">
+                <input type="email" class="form-control flex-fill" maxlength="50" name="inputEmail" id="floatingEmail" value="{{ old('inputEmail') }}" placeholder="name@example.com">
                 <label for="floatingEmail">Email</label>
             </div>
 
             <div class="form-group form-floating mb-3 d-flex">
-                <input type="text" class="form-control flex-fill" name="inputTel" minlength="10" maxlength="20" id="floatingTel" value="{{ old('inputTel') }}" placeholder="Phone number">
+                <input type="text" class="form-control flex-fill" name="inputTel" minlength="10" maxlength="15" id="floatingTel" value="{{ old('inputTel') }}" placeholder="Phone number">
                 <label for="floatingTel">Téléphone</label>
             </div>
 

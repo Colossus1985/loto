@@ -10,6 +10,7 @@ use App\Models\User;
 use Egulias\EmailValidator\Parser\PartParser;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -64,7 +65,6 @@ class participantController extends Controller
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputPseudo' => 'required',
-            // 'inputEmail' => 'email',
             'inputTel' => 'required',
             'inputPassword' => 'required',
             'inputPassword_confirmation' => 'required|same:inputPassword'
@@ -131,19 +131,43 @@ class participantController extends Controller
 
     public function participantDelete($idParticipant)
     {
-        // dd($idParticipant);
+        
         $participant = Participants::query()
             ->select('pseudo')
             ->where('id', '=', $idParticipant)
             ->get();
+        $pseudo = $participant[0]->pseudo;
 
         DB::table('participants')
             ->where('id', '=', $idParticipant)
             ->delete();
 
-        return redirect()->route('home')
-            ->with('success', $participant[0]->pseudo.' a été supprimé avec succès!');
+        DB::table('users')
+            ->where('pseudo', '=', $pseudo)
+            ->delete();
 
+        if (Auth::user()->admin == 1 && Auth::user()->id != $idParticipant) {
+            return redirect()->route('home', 'all')
+                ->with('success', $pseudo.' a été supprimé avec succès!');
+
+        } else if (Auth::user()->admin == 1 && Auth::user()->id == $idParticipant) {
+            Auth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+            
+            return redirect()->route('logReg')
+                ->with('success', 'Vous devez vous reenrigestrez');
+
+        } else if (Auth::user()->admin == 0) {
+            Auth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+            
+            return redirect()->route('logReg')
+                ->with('success', 'Vous ne faite plus parti(e) de "Loto avec Flo"');
+        }
+            
+        
     }
 
     public function updateParticipant(Request $request, $idParticipant)
@@ -271,7 +295,7 @@ class participantController extends Controller
             $participant->save();
         } catch(Exception) {
             return redirect()->back()
-            ->with('error', 'Un problème de mise a jour a été rencontré !');
+                ->with('error', 'Un problème de mise a jour a été rencontré !');
         }
         
         return redirect()->back()

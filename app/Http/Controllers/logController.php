@@ -139,11 +139,11 @@ class logController extends Controller
             ->with('error', 'wrong identifier or password');
     }
 
-    public function logout(Request $request) 
+    public function logout() 
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        session()->invalidate();
+        session()->regenerateToken();
         return redirect()->route('logReg')
             ->with('success', 'Vous etes deloggué(e). A bientot');
     }

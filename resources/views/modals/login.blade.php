@@ -1,9 +1,10 @@
-<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabelLogin" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="d-flex flex-column">
-                <h5 class="modal-title" id="exampleModalLabel-login" style="color:white;">Login</h5>
+                    {{-- <h5 class="modal-title" id="exampleModalLabel">Ajouter un Participant</h5> --}}
+                    <h5 class="modal-title" id="exampleModalLabelLogin" style="color:rgb(0, 0, 0);">Login</h5>
                 </div>
                 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -21,15 +22,12 @@
                         <input type="password" class="form-control flex-fill" name="password" placeholder="Password"  id="loginFloatingPassword">
                         <label for="loginFloatingPassword">Password</label>
                     </div>
-            <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary" type="submit" style="width:45%;">Confirm</button></div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit" style="width:45%;">Confirmer</button>
+                    </div>
                 </form>
-                
             </div>
-                
-            <div class="modal-footer d-flex justify-content-between">
-                <button class="btn vert_foncé text-white" data-bs-toggle="modal" data-bs-target="#modalRegister">
-                    Register</button>
+            <div class="modal-footer d-flex justify-content-start">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>

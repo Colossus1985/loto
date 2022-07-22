@@ -18,7 +18,7 @@ class moneyController extends Controller
 
         $money = Money::query()
             ->where('id_pseudo', '=', $idParticipant)
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'desc') // to get the last amount
             ->get();
 
         $credit = $request->inputMontant;
