@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-lg bg-info px-4 mb-4">
     <div class="container-fluid d-flex flex-row">
+        <img class="me-3 bg-warning rounded" src="/images/LogoLoto.png">
         @if (Auth::user())
 
             <div class="d-flex flex-row">
                 @if (Auth::user()->admin == 1)
-                    <a class="navbar-brand" href="{{ route('home', "all") }}">Home</a>
+                    <a class="navbar-brand" href="{{ route('home', "all") }}"><h3>Home</h3></a>
                 @elseif (Auth::user()->admin == 0)
                     <a class="navbar-brand" href="{{ route('home', Auth::user()->id) }}">Home</a>
                 @endif
@@ -127,7 +128,7 @@
                 @if (Auth::user()->admin == 1)
                     <form class="me-3 mb-2" action="{{ route('searchParticipant') }}" method="GET">
                         @csrf
-                        <div class="input-group ">
+                        <div class="input-group flex-nowrap ">
                             <input class="form-control me-1 mt-2" maxlength="15" name="inputParticipant" placeholder="Participant..."
                                 aria-label="Participant...">
                             <button class="btn btn-outline-success ms-1 mt-2 ui-tooltip" title="chercher" type="submit">🔎</button>
