@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-info px-4 mb-4">
     <div class="container-fluid d-flex flex-row">
-        <img class="me-3 bg-warning rounded" src="public/images/LogoLoto.png">
+        <img class="me-3 bg-warning rounded" src="/Images/LogoLoto.png">
         @if (Auth::user())
 
             <div class="d-flex flex-row">
