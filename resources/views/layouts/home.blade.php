@@ -17,7 +17,7 @@
             <p class="alert alert-danger mt-3">{{ session('error') }}</p>
         @endif
     </div>
-    @include('modals.addAddParticipant')
+    @include('modals.addParticipant')
     @include('modals.jouer')
     @include('modals.addGroup')
     @include('modals.participantGroup')
