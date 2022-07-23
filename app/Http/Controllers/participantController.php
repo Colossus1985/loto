@@ -172,15 +172,15 @@ class participantController extends Controller
 
     public function updateParticipant(Request $request, $idParticipant)
     {
-        $request->validate([
-            'inputPasswordActuel' => 'required|current_password',
-        ]);
-
         $controle = $this->controlesInputs($request);
         if (!$controle[0]['bool']) {
             return redirect()->back()
                     ->with('error', $controle[0]['message']);
         }
+
+        $request->validate([
+            'inputPasswordActuel' => 'required|current_password',
+        ]);
 
         $pseudo = $request->inputPseudo;
 
@@ -356,81 +356,84 @@ class participantController extends Controller
     {
         $arrayControles = [];
         $regexInputName = "/^(\s)*[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-zéèîôàêç@])*))*(\s)*$/";
-        $regexInputGeneral = "/^(\s)*[A-Za-z0-9]+((\s)?((\'|\-|\.)?([A-Za-z0-9éèîôàêç@])*))*(\s)*$/";
+        $regexInputPseudoPdw = "/^(\s)*[A-Za-z0-9éèîôàêç@]+((\s)?((\'|\-|\.)?([A-Za-z0-9éèîôàêç@])*))*(\s)*$/";
         $regexPhone = "/^([0-9]*)$/";
-        
-        if ($request->inputPasswordActuel != null || $request->inputPasswordActuel != "") {
-            $pwd_actuel = $request->inputPasswordActuel;
-            if (!preg_match($regexInputGeneral, $pwd_actuel)) {
-                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères trop spéciaux dans le mot de passe!"]);
-                return $arrayControles;
-            }
-        }
 
-        if (($request->inputPassword != null || $request->inputPassword != '') 
-            && ($request->inputPassword_confirmation != null || $request->inputPassword_confirmation != '')) {
-            $pwd_one = $request->inputPassword;
-            $pwd_two = $request->inputPassword_confirmation;
-            if (!preg_match($regexInputGeneral, $pwd_one) 
-                || (!preg_match($regexInputGeneral, $pwd_two))) {
-                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères trop spéciaux dans le nouveau mot de passe!"]);
+        $pwd_one = $request->inputPassword;
+        $pwd_two = $request->inputPassword_confirmation;
+        $phone = $request->inputTel;
+        $firstName = $request->inputFirstName;
+        $lastName = $request->inputLastName;
+        $pseudo = $request->inputPseudo;
+        $log_identifiant = $request->inputRegister;
+        $nameGroup = $request->inputNameGroup;
+
+        if ($pwd_one != null || $pwd_one != '') {
+           if (!preg_match($regexInputPseudoPdw, $pwd_one)) {
+                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères trop spéciaux dans le mot de passe !"]);
                 return $arrayControles;
-            }
+            } 
+        }
+ 
+        if ($pwd_two != null || $pwd_two != '') {
+            if (!preg_match($regexInputPseudoPdw, $pwd_two)) {
+                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères trop spéciaux dans le mot de passe !"]);
+                 return $arrayControles;
+             } 
+         }
+        
+        if ($pwd_one != null && $pwd_two != null) {
             if ($pwd_one != $pwd_two) {
-                array_push($arrayControles, ['bool' => false, 'message' => "Les deux nouveaux mot de passes ne correspondent pas!"]);
+                array_push($arrayControles, ['bool' => false, 'message' => "Les deux mot de passes ne correspondent pas!"]);
                 return $arrayControles;
             }
         }
         
-        if ($request->inputTel != null || $request->inputTel != '') {
-            $phone = $request->inputTel;
-            if (!preg_match($regexPhone, $phone)) {
+        if ($phone != null || $phone != '') {
+           if (!preg_match($regexPhone, $phone)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Veuillez rentrer seulement des numéros sans espaces pour le numéro de téléphone, s'il vous plait!"]);
                 return $arrayControles;
-            }
+            } 
         }
         
-        if ($request->inputFirstName != null || $request->inputFirstName != '') {
-            $firstName = $request->inputFirstName;
+        if ($firstName != null || $firstName != '') {
             if (!preg_match($regexInputName, $firstName)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux et chiffres dans le prenom!"]);
                 return $arrayControles;
             }
         }
-
-        if ($request->inputLastName != null || $request->inputLastName != '') {
-            $lastName = $request->inputLastName;
-            if (!preg_match($regexInputName, $lastName)) {
+        
+        if ($lastName != null || $lastName != '') {
+           if (!preg_match($regexInputName, $lastName)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux et chiffres dans le nom!"]);
                 return $arrayControles;
-            }
+            } 
         }
         
-        if ($request->inputPseudo != null || $request->inputPseudo != '') {
-            $pseudo = $request->inputPseudo;
-            if (!preg_match($regexInputGeneral, $pseudo)) {
+        if ($pseudo != null || $pseudo != '') {
+            if (!preg_match($regexInputPseudoPdw, $pseudo)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le pseudo!"]);
                 return $arrayControles;
             }
         }
-
-        if ($request->inputEmail != null || $request->inputEmail != "") {
-            $email = $request->inputEmail;
-            if (!preg_match($regexInputGeneral, $email)) {
-            array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le email!"]);
-            return $arrayControles;
+        
+        if ($log_identifiant != null || $log_identifiant != '') {
+            if (!preg_match($regexInputPseudoPdw, $log_identifiant)) {
+                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans l'identifiant !"]);
+                return $arrayControles;
             }
         }
 
-        if ($request->inputParticipant != null || $request->inputParticipant != '') {
-            $pseudoSearch = $request->inputParticipant;
-            if (!preg_match($regexInputGeneral, $pseudoSearch)) {
-                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le champs de recherche!"]);
+        if ($nameGroup != null || $nameGroup != '') {
+            if (!preg_match($regexInputName, $nameGroup)) {
+                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le nom du groupe!"]);
                 return $arrayControles;
             }
         }
         
-        //###---If all is alright sending back true with empty message---###
+        
+
+//###---If all is alright sending back 'true' with empty message---###
 
         array_push($arrayControles, ['bool' => true, 'message' => ""]);
             return $arrayControles;

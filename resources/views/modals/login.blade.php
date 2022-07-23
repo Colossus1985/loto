@@ -19,7 +19,7 @@
                     </div>
                     
                     <div class="d-flex form-group form-floating mb-3">
-                        <input type="password" class="form-control flex-fill" name="password" placeholder="Password"  id="loginFloatingPassword">
+                        <input type="password" class="form-control flex-fill" name="inputPassword" placeholder="Password"  id="loginFloatingPassword">
                         <label for="loginFloatingPassword">Password</label>
                     </div>
                     <div class="d-flex justify-content-end">
