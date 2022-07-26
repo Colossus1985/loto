@@ -92,7 +92,7 @@
                                             @foreach ( $fonds as $fond )
                                                 <tr>
                                                     <td><h3 class="me-3 fw-bold">{{ $fond['nameGroup'] }}</h3></td>
-                                                    <td class="text-end"><h3 class="text-info fw-bold"> {{ number_format($fond['fonds'], 2) }} €</h3></td>
+                                                    <td class="text-end"><h3 class="text-info fw-bold"> {{ $fond['fonds'] }} €</h3></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -113,8 +113,8 @@
                                         @foreach ( $sommeGainsByGroups as $sommeGainsByGroup )
                                             <tr>
                                                 <td><h3 class="me-3 fw-bold">{{ $sommeGainsByGroup['nameGroup'] }}</h3></td>
-                                                @if ( number_format($sommeGainsByGroup['sommeGains'], 2) > 0.00)
-                                                    <td class="text-end"><h3 class="text-info fw-bold"> {{ number_format($sommeGainsByGroup['sommeGains'], 2) }} €</h3></td>
+                                                @if ( $sommeGainsByGroup['sommeGains'] > 0.00)
+                                                    <td class="text-end"><h3 class="text-info fw-bold"> {{ $sommeGainsByGroup['sommeGains'] }} €</h3></td>
                                                 @endif    
                                             </tr>
                                         @endforeach
@@ -172,5 +172,4 @@
             </div>
         @endif 
     </div>
-    @include('modals.addGain')
 </nav>

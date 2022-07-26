@@ -151,60 +151,64 @@
         
      @endif
 
-    <table class="table table-bordered my-4">
-        <tr class="bg-light text-center">
-            <th>Montant</th>
-            <th>Credit</th>
-            <th>Debit</th>
-            <th>Credit Gain</th>
-            <th>Date</th>
-        </tr>
-        @foreach ($actions as $action)
-            <tr>
-                @if ($action->amount < 0)
-                    <td class="text-end fw-bold bg-dark text-white">
-                        {{ number_format($action->amount, 2) }} €
-                    </td>
-                @elseif ($action->amount == 0.00 || $action->amount == null)
-                    <td class="text-end fw-bold bg-light">
-                        {{ number_format($action->amount, 2) }} €
-                    </td>
-                @elseif ($action->amount >= 0.01 && $action->amount <= 3.49 )
-                    <td class="text-end fw-bold bg-danger">
-                        {{ number_format($action->amount, 2) }} €
-                    </td>
-                @elseif ($action->amount >= 3.50 && $action->amount <= 9.99)
-                    <td class="text-end fw-bold bg-warning">
-                        {{ number_format($action->amount, 2) }} €
-                    </td>
-                @elseif ($action->amount >= 10.00)
-                    <td class="text-end fw-bold bg-success">
-                        {{ number_format($action->amount, 2) }} €
-                    </td>
-                @endif
-                
-                @if ( $action->credit >= 0.01 )
-                    <td class="bg-success text-end fw-bold">{{ number_format($action->credit, 2) }} €</td>
-                @else
-                    <td class="text-end fw-bold">{{ number_format($action->credit, 2) }} €</td>
-                @endif
-
-                @if ( $action->debit >= 0.01 )
-                    <td class="bg-danger text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
-                @else
-                    <td class="text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
-                @endif
-
-                @if ( $action->creditGain >= 0.01 )
-                    <td class="bg-success text-end fw-bold">{{ number_format($action->creditGain, 2) }} €</td>
-                @else
-                    <td class="text-end fw-bold">{{ number_format($action->creditGain, 2) }} €</td>
-                @endif
-
-                <td class="fw-bold text-center">{{ $action->created_at }}</td>
+    <div>
+        <table class="table table-bordered my-4">
+            <tr class="bg-light text-center">
+                <th>Montant</th>
+                <th>Credit</th>
+                <th>Debit</th>
+                <th>Credit Gain</th>
+                <th>Date</th>
             </tr>
-        @endforeach
-    </table>
+            @foreach ($actions as $action)
+                <tr>
+                    @if ($action->amount < 0)
+                        <td class="text-end fw-bold bg-dark text-white">
+                            {{ number_format($action->amount, 2) }} €
+                        </td>
+                    @elseif ($action->amount == 0.00 || $action->amount == null)
+                        <td class="text-end fw-bold bg-light">
+                            {{ number_format($action->amount, 2) }} €
+                        </td>
+                    @elseif ($action->amount >= 0.01 && $action->amount <= 3.49 )
+                        <td class="text-end fw-bold bg-danger">
+                            {{ number_format($action->amount, 2) }} €
+                        </td>
+                    @elseif ($action->amount >= 3.50 && $action->amount <= 9.99)
+                        <td class="text-end fw-bold bg-warning">
+                            {{ number_format($action->amount, 2) }} €
+                        </td>
+                    @elseif ($action->amount >= 10.00)
+                        <td class="text-end fw-bold bg-success">
+                            {{ number_format($action->amount, 2) }} €
+                        </td>
+                    @endif
+                    
+                    @if ( $action->credit >= 0.01 )
+                        <td class="bg-success text-end fw-bold">{{ number_format($action->credit, 2) }} €</td>
+                    @else
+                        <td class="text-end fw-bold">{{ number_format($action->credit, 2) }} €</td>
+                    @endif
+
+                    @if ( $action->debit >= 0.01 )
+                        <td class="bg-danger text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
+                    @else
+                        <td class="text-end fw-bold">{{ number_format($action->debit, 2) }} €</td>
+                    @endif
+
+                    @if ( $action->creditGain >= 0.01 )
+                        <td class="bg-success text-end fw-bold">{{ number_format($action->creditGain, 2) }} €</td>
+                    @else
+                        <td class="text-end fw-bold">{{ number_format($action->creditGain, 2) }} €</td>
+                    @endif
+
+                    <td class="fw-bold text-center">{{ $action->created_at }}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+    {{ $actions->links() }}
+    
 
     <form action="{{ route('participantDelete', $participant[0]->id) }}" method="get">
         @csrf
@@ -216,5 +220,6 @@
         </div>
     </form>
 </div>
+
 
 @endsection

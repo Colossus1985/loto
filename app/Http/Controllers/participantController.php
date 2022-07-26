@@ -241,7 +241,7 @@ class participantController extends Controller
         $money = Money::query()
             ->where('id_pseudo', '=', $id_pseudo)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(4);
 
         $groups = Groups::query()
             ->get();

@@ -24,6 +24,7 @@
     @include('modals.addGroup')
     @include('modals.participantGroup')
     @include('modals.login')
+    @include('modals.addGain')
     
     @yield('content')
     

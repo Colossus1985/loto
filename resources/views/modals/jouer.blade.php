@@ -58,8 +58,6 @@
                         <button
                             class="btn btn-primary"
                             type="submit"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalLogin"
                             style="width: 50%"
                             onclick="return confirm('Jouer et retirer la mise de tous les participant(s)?');"
                         >

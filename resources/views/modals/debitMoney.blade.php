@@ -38,10 +38,8 @@
                         <button
                             class="btn btn-primary"
                             type="submit"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalLogin"
                             style="width: 45%"
-                            onclick="return confirm('Retirer les fonds de {{ $participant->pseudo }} ?');"
+                            {{-- onclick="return confirm('Retirer les fonds de {{ $participant->pseudo }} ?');" --}}
                         >
                             Retirer
                         </button>

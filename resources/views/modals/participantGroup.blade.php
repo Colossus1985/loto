@@ -57,8 +57,6 @@
                         <button
                             class="btn btn-primary"
                             type="submit"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalLogin"
                             style="width: 45%"
                             onclick="return confirm('Sur de la composition du group?');"
                         >

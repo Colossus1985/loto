@@ -60,7 +60,7 @@
                         @endforeach
                     </div>
                     <div class="d-flex btn-G-L d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#modalLogin" style="width: 45%;">Ajouter</button>
+                        <button class="btn btn-primary" type="submit" style="width: 45%;">Ajouter</button>
                     </div>
                 </form>
             </div>

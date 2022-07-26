@@ -1,12 +1,8 @@
-<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabelLogin" aria-hidden="true">
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLogin" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="d-flex flex-column">
-                    {{-- <h5 class="modal-title" id="exampleModalLabel">Ajouter un Participant</h5> --}}
-                    <h5 class="modal-title" id="exampleModalLabelLogin" style="color:rgb(0, 0, 0);">Login</h5>
-                </div>
-                
+                <h5 class="modal-title" id="modalLogin">Login</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
