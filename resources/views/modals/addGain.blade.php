@@ -70,28 +70,12 @@
                                         name="inputNameGroup" 
                                         role="switch" 
                                         id="flexSwitchNameGroup" 
-                                        value="{{ $group->nameGroup }}">
+                                        value="{{ $group->nameGroup }}"
+                                        required>
                                     <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup}}</label>
                                 </div>
                             @endforeach
                         </div>
-                        {{-- <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
-                            <div class="">
-                                <p class="mt-1 mb-2 ps-3">Choisir le(s) Participant(s) : </p>
-                            </div>
-                            @foreach ($participants as $participant)
-                                <div class="ms-3 form-check form-switch">
-                                    <input class="form-check-input me-3"
-                                        type="checkbox" 
-                                        name="inputParticipantWinArray[]" 
-                                        role="switch" 
-                                        id="flexSwitchCheckDefault" 
-                                        checked
-                                        value="{{ $participant->pseudo }}">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ $participant->pseudo}}</label>
-                                </div>
-                            @endforeach
-                        </div> --}}
                     </div>
 
                     <div class="d-flex btn-G-L justify-content-end">

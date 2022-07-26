@@ -45,7 +45,9 @@
                                         name="inputNameGroup" 
                                         role="switch" 
                                         id="flexSwitchNameGroup" 
-                                        value="{{ $group->nameGroup }}">
+                                        value="{{ $group->nameGroup }}"
+                                        required
+                                    />
                                     <label class="form-check-label" for="flexSwitchNameGroup">{{ $group->nameGroup }}</label>
                                 </div>
                             @endforeach
