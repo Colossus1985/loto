@@ -85,6 +85,7 @@ class gainController extends Controller
             ->get();
 
         $arrayFondsByGroup = $this->fonds($groups);
+        $groupsDispo = $this->groupsDisponible();
 
         $arrayGainByGroup = [];
         if (count($groups) != 0) {
@@ -108,16 +109,27 @@ class gainController extends Controller
             array_push($arrayGainByGroup, ['nameGroup' => "pas de groupe", 'sommeGains' => 0]);
             $sommeGains = "";
         }
-
+// dd($groupsDispo);
         return view('pages.gains', [
             'gains' => $gains,
             'sommeGains' => $sommeGains,
             'participants' => $participants,
             'groups' => $groups,
+            'groupsDispo' => $groupsDispo,
             'fonds' => $arrayFondsByGroup,
             'sommeGainsByGroups' => $arrayGainByGroup]);
     } 
 
+    public function groupsDisponible() {
+        $groupsDispo = Groups::join(
+                'participants', 'groups.id', '=', 'participants.id_group')
+            ->select('groups.nameGroup')
+            ->groupByRaw('groups.nameGroup')
+            ->get();
+
+        return $groupsDispo;
+    }
+    
     public function fonds($groups)
     {
         $arrayFondsByGroup = [];

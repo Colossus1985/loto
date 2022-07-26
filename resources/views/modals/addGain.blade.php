@@ -63,7 +63,7 @@
                             <div class="">
                                 <p class="mt-1 mb-2 ps-3">Choisir le groupe : </p>
                             </div>
-                            @foreach ($groups as $group)
+                            @foreach ($groupsDispo as $group)
                                 <div class="ms-3 form-check form-switch">
                                     <input class="form-check-input me-3"
                                         type="radio" 

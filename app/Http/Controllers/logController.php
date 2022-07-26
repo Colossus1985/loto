@@ -25,11 +25,13 @@ class logController extends Controller
 
         $arrayFondsByGroup = $this->fonds($groups);
         $arrayGainByGroup = $this->gains($groups);
+        $groupsDispo = $this->groupsDisponible();
 
         return view('pages.log', [
             'participants' => $participants, 
             'fonds' => $arrayFondsByGroup, 
             'sommeGainsByGroups' => $arrayGainByGroup,
+            'groupsDispo' => $groupsDispo,
             'groups' => $groups]);
     }
 
@@ -45,7 +47,6 @@ class logController extends Controller
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputPseudo' => 'required',
-            // 'inputEmail' => 'email',
             'inputTel' => 'required',
             'inputPassword' => 'required',
             'inputPassword_confirmation' => 'required|same:inputPassword'
@@ -203,6 +204,16 @@ class logController extends Controller
             }
         }
         return $arrayGainByGroup;
+    }
+
+    public function groupsDisponible() {
+        $groupsDispo = Groups::join(
+                'participants', 'groups.id', '=', 'participants.id_group')
+            ->select('groups.nameGroup')
+            ->groupByRaw('groups.nameGroup')
+            ->get();
+
+        return $groupsDispo;
     }
 
     public function controlesInputs($request)
