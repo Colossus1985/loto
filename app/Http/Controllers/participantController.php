@@ -28,10 +28,12 @@ class participantController extends Controller
 
             $arrayFondsByGroup = $this->fonds($groups);
             $arrayGainByGroup = $this->gains($groups);
+            $groupsDispo = $this->groupsDisponible();
 
             return view('pages.main', [
                 'participants' => $participants, 
                 'fonds' => $arrayFondsByGroup, 
+                'groupsDispo' => $groupsDispo,
                 'sommeGainsByGroups' => $arrayGainByGroup,
                 'groups' => $groups]);
         } else {
@@ -44,10 +46,12 @@ class participantController extends Controller
 
             $arrayFondsByGroup = $this->fonds($groups);
             $arrayGainByGroup = $this->gains($groups);
+            $groupsDispo = $this->groupsDisponible();
 
             return view('pages.main', [
                 'participants' => $participants, 
                 'fonds' => $arrayFondsByGroup, 
+                'groupsDispo' => $groupsDispo,
                 'sommeGainsByGroups' => $arrayGainByGroup,
                 'groups' => $groups]);
         }
@@ -185,12 +189,12 @@ class participantController extends Controller
         $pseudo = $request->inputPseudo;
 
         $inputNameGroupNew = $request->inputNameGroupNew;
-        if  ($inputNameGroupNew == "" || $inputNameGroupNew == Null) {
-            $inputNameGroup = $request->inputNameGroupOld;
-        } elseif ($inputNameGroupNew == "pas de groupe") {
+        if ($inputNameGroupNew == "Pas de groupe") {
             $inputNameGroup = Null;
+            $id_group = Null;
         } else {
             $inputNameGroup = $inputNameGroupNew;
+            $id_group = Groups::where('nameGroup', '=', $inputNameGroup)->first();
         }
         
         $participant = Participants::find($idParticipant);
@@ -200,6 +204,7 @@ class participantController extends Controller
         $participant->pseudo = $request->inputPseudo;
         $participant->email = $request->inputEmail;
         $participant->tel = $request->inputTel;
+        $participant->id_group = $id_group['id'];
         try {
             $participant->save();
         } catch (Exception $e){
@@ -243,12 +248,14 @@ class participantController extends Controller
 
         $arrayFondsByGroup = $this->fonds($groups);
         $arrayGainByGroup = $this->gains($groups);
+        $groupsDispo = $this->groupsDisponible();
 
         return view('pages.participant', 
             ['participant' => $participant, 
             'actions' => $money, 
             'participants' => $participants,
             'fonds' => $arrayFondsByGroup,
+            'groupsDispo' => $groupsDispo,
             'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
@@ -278,19 +285,29 @@ class participantController extends Controller
 
         $arrayFondsByGroup = $this->fonds($groups);
         $arrayGainByGroup = $this->gains($groups);
+        $groupsDispo = $this->groupsDisponible();
 
         return view('pages.main', [
             'participants' => $participants, 
             'fonds' => $arrayFondsByGroup, 
+            'groupsDispo' => $groupsDispo,
             'sommeGainsByGroups' => $arrayGainByGroup,
             'groups' => $groups]);
     }
 
     public function changeGroup(Request $request, $idParticipant)
     {
-        // dd($request);
+        $name_group = $request->inputNameGroupNew;
+        $id_group = Groups::where('nameGroup', '=', $name_group)->first();
+
         $participant = Participants::find($idParticipant);
-        $participant->nameGroup = $request->inputNameGroupNew;
+        $participant->nameGroup = $name_group;
+        if ($id_group != null) {
+            $participant->id_group = $id_group['id'];
+        } else {
+            $participant->id_group = null;
+        }
+        
         try {
             $participant->save();
         } catch(Exception) {
@@ -350,6 +367,16 @@ class participantController extends Controller
             }
         }
         return $arrayGainByGroup;
+    }
+
+    public function groupsDisponible() {
+        $groupsDispo = Groups::join(
+                'participants', 'groups.id', '=', 'participants.id_group')
+            ->select('groups.nameGroup')
+            ->groupByRaw('groups.nameGroup')
+            ->get();
+
+        return $groupsDispo;
     }
     
     public function controlesInputs($request)

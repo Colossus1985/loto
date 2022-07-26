@@ -36,6 +36,8 @@ class groupsController extends Controller
     public function participantGroup(Request $request)
     {
         $nameGroup = $request->inputNameGroup;
+        $idGroup = Groups::where('nameGroup', '=', $nameGroup)->first();
+
         $arrayParticipant = $request->inputParticipantArray;
 // dd($arrayParticipant);
         for ($i = 0; $i < count($arrayParticipant); $i++) {
@@ -47,6 +49,7 @@ class groupsController extends Controller
 
             $participantGroup = Participants::find($idParticipant);
             $participantGroup->nameGroup = $nameGroup;
+            $participantGroup->id_group = $idGroup['id'];
             $participantGroup->save();
         }
         
@@ -58,7 +61,7 @@ class groupsController extends Controller
     {
         $arrayControles = [];
         $regexInputName = "/^(\s)*[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-zéèîôàêç@])*))*(\s)*$/";
-        $regexInputPseudoPdw = "/^(\s)*[A-Za-z0-9éèîôàêç@]+((\s)?((\'|\-|\.)?([A-Za-z0-9éèîôàêç@])*))*(\s)*$/";
+        $regexLiberty = "/^(\s)*[A-Za-z0-9éèîôàêç@]+((\s)?((\'|\-|\.)?([A-Za-z0-9éèîôàêç@])*))*(\s)*$/";
         $regexPhone = "/^([0-9]*)$/";
 
         $pwd_one = $request->inputPassword;
@@ -71,14 +74,14 @@ class groupsController extends Controller
         $nameGroup = $request->inputNameGroup;
 
         if ($pwd_one != null || $pwd_one != '') {
-           if (!preg_match($regexInputPseudoPdw, $pwd_one)) {
+           if (!preg_match($regexLiberty, $pwd_one)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères trop spéciaux dans le mot de passe !"]);
                 return $arrayControles;
             } 
         }
  
         if ($pwd_two != null || $pwd_two != '') {
-            if (!preg_match($regexInputPseudoPdw, $pwd_two)) {
+            if (!preg_match($regexLiberty, $pwd_two)) {
                  array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères trop spéciaux dans le mot de passe !"]);
                  return $arrayControles;
              } 
@@ -113,21 +116,21 @@ class groupsController extends Controller
         }
         
         if ($pseudo != null || $pseudo != '') {
-            if (!preg_match($regexInputPseudoPdw, $pseudo)) {
+            if (!preg_match($regexLiberty, $pseudo)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le pseudo!"]);
                 return $arrayControles;
             }
         }
         
         if ($log_identifiant != null || $log_identifiant != '') {
-            if (!preg_match($regexInputPseudoPdw, $log_identifiant)) {
+            if (!preg_match($regexLiberty, $log_identifiant)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans l'identifiant !"]);
                 return $arrayControles;
             }
         }
 
         if ($nameGroup != null || $nameGroup != '') {
-            if (!preg_match($regexInputName, $nameGroup)) {
+            if (!preg_match($regexLiberty, $nameGroup)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le nom du groupe!"]);
                 return $arrayControles;
             }

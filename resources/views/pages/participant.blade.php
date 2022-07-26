@@ -11,7 +11,7 @@
                         readonly
                     @endif
                     >
-                <label for="floatingfirstName" class="text-nowrap">First Name</label>
+                <label for="floatingfirstName" class="text-nowrap">Prenom</label>
             </div>
 
             <div class="form-group form-floating mb-3 me-3 d-flex flex-fill">
@@ -21,7 +21,7 @@
                         readonly
                     @endif
                     >
-                <label for="floatinglastName" class="text-nowrap">Last Name</label>
+                <label for="floatinglastName" class="text-nowrap">Nom</label>
             </div>
 
             <div class="form-group form-floating mb-3 d-flex flex-fill">
@@ -43,7 +43,7 @@
                         readonly
                     @endif
                     >
-                <label for="floatingTel" class="text-nowrap">Phone</label>
+                <label for="floatingTel" class="text-nowrap">Téléphone</label>
             </div>
             <div class="form-group form-floating mb-3 me-3 d-flex flex-fill">
                 <input id="floatingEmail" type="email" class="form-control flex-fill fw-bold" name="inputEmail"
@@ -82,12 +82,12 @@
                 <div class="form-group form-floating mb-3 me-3">
                     <input id="floatingPasswordNew" type="password" maxlength="20" minlength="3" class="form-control ui-tooltip" title="entre 3 et 20 charactères" name="inputPassword"
                         placeholder="Password">
-                    <label for="floatingPasswordNew">new Password</label>
+                    <label for="floatingPasswordNew">Nouveau Password</label>
                 </div>
                 <div class="form-group form-floating mb-3">
                     <input id="floatingConfirmPassword" type="password" maxlength="20" minlength="3" class="form-control ui-tooltip" title="entre 3 et 20 charactères"
                         name="inputPassword_confirmation" placeholder="Confirm Password">
-                    <label for="floatingConfirmPassword">Confirm new Password</label>
+                    <label for="floatingConfirmPassword">Confirmer Password</label>
                 </div>
             </div>
         @endif
