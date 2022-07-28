@@ -184,6 +184,7 @@ class participantController extends Controller
 
     public function updateParticipant(Request $request, $idParticipant)
     {
+        // dd($request);
         $controle = $this->controlesInputs($request);
         if (!$controle[0]['bool']) {
             return redirect()->back()
@@ -196,23 +197,26 @@ class participantController extends Controller
 
         $pseudo = $request->inputPseudo;
 
+        $participant = Participants::find($idParticipant);
+
         $inputNameGroupNew = $request->inputNameGroupNew;
         if ($inputNameGroupNew == "Pas de groupe") {
             $inputNameGroup = Null;
+            // dd($inputNameGroup);
             $id_group = Null;
+            $participant->id_group = $id_group;
         } else {
             $inputNameGroup = $inputNameGroupNew;
             $id_group = Groups::where('nameGroup', '=', $inputNameGroup)->first();
+            $participant->id_group = $id_group['id'];
         }
         
-        $participant = Participants::find($idParticipant);
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;
         $participant->nameGroup = $inputNameGroup;
         $participant->pseudo = $request->inputPseudo;
         $participant->email = $request->inputEmail;
         $participant->tel = $request->inputTel;
-        $participant->id_group = $id_group['id'];
         try {
             $participant->save();
         } catch (Exception $e){

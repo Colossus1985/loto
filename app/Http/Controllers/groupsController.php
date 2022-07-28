@@ -39,7 +39,6 @@ class groupsController extends Controller
         $idGroup = Groups::where('nameGroup', '=', $nameGroup)->first();
 
         $arrayParticipant = $request->inputParticipantArray;
-// dd($arrayParticipant);
         for ($i = 0; $i < count($arrayParticipant); $i++) {
             $participant = Participants::query()
                 ->where('pseudo', '=', $arrayParticipant[$i])

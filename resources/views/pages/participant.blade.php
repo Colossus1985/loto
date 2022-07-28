@@ -60,11 +60,11 @@
                     @else me-3
                     @endif">
                     @if ($participant[0]->nameGroup == null || $participant[0]->nameGroup == "null" || $participant[0]->nameGroup == "") 
-                        <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
+                        <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupNew"
                             value="Pas de groupe" readonly>
                         <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
                     @else
-                        <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupOld"
+                        <input id="floatingNameGroup" type="text" class="form-control flex-fill fw-bold" name="inputNameGroupNew"
                             value="{{ $participant[0]->nameGroup }}" readonly>
                         <label for="floatingNameGroup" class="text-nowrap">Groupe</label>
                     @endif

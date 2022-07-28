@@ -2,35 +2,6 @@
 @section('content')
 <div class="px-5">
     <div class="mt-0">
-        {{-- <div class="d-flex flex-row justify-content-between">
-            <div class="d-flex flex-column">
-                <div>
-                    <h2 class="fw-bold">Fonds disponibles :</h2> 
-                </div>
-                <div class="d-flex flex-column">
-                    @foreach ( $fonds as $fond )
-                        <div class="d-flex flex-row">
-                            <h3 class="me-3 fw-bold">{{ $fond['nameGroup'] }}</h3>
-                            <h3 class="text-info fw-bold"> {{ number_format($fond['fonds'], 2) }} €</h3>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <div class="d-flex flex-column">
-                <div>
-                    <h2 class="fw-bold">Gains :</h2> 
-                </div>
-                <div class="d-flex flex-column">
-                    @foreach ( $sommeGainsByGroups as $sommeGainsByGroup )
-                        <div class="d-flex flex-row">
-                            <h3 class="me-3 fw-bold">{{ $sommeGainsByGroup['nameGroup'] }}</h3>
-                            <h3 class="text-info fw-bold"> {{ number_format($sommeGainsByGroup['sommeGains'], 2) }} €</h3>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div> --}}
         <table class="table table-bordered">
             <tr class="bg-light text-center fs-4">
                 <th>Groupe</th>
