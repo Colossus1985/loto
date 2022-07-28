@@ -7,6 +7,7 @@ use App\Models\Groups;
 use App\Models\Money;
 use App\Models\Participants;
 use App\Models\User;
+use App\Models\Users;
 use Egulias\EmailValidator\Parser\PartParser;
 use Exception;
 use Illuminate\Http\Request;
@@ -142,27 +143,34 @@ class participantController extends Controller
             ->get();
         $pseudo = $participant[0]->pseudo;
 
-        DB::table('participants')
-            ->where('id', '=', $idParticipant)
-            ->delete();
-
-        DB::table('users')
-            ->where('pseudo', '=', $pseudo)
-            ->delete();
+        $admins = Users::query()
+            ->select('admin')
+            ->where('admin', '=', 1)
+            ->get();
 
         if (Auth::user()->admin == 1 && Auth::user()->id != $idParticipant) {
+            $this->deleteUser($idParticipant, $pseudo);
             return redirect()->route('home', 'all')
                 ->with('success', $pseudo.' a été supprimé avec succès!');
 
         } else if (Auth::user()->admin == 1 && Auth::user()->id == $idParticipant) {
-            Auth::logout();
-            session()->invalidate();
-            session()->regenerateToken();
-            
-            return redirect()->route('logReg')
-                ->with('success', 'Vous devez vous reenrigestrez');
+            if (count($admins) > 1 ) {
+                $this->deleteUser($idParticipant, $pseudo);
+                
+                Auth::logout();
+                session()->invalidate();
+                session()->regenerateToken();
+                
+                return redirect()->route('logReg')
+                    ->with('success', 'Vous ne faite plus parti(e) de "Loto avec Flo"');
+
+            } else {
+                return redirect()->back()
+                    ->with('error', 'Tant que vous êtes le seul administrateur vous ne pouvez vous supprimer!'); 
+            }
 
         } else if (Auth::user()->admin == 0) {
+            $this->deleteUser($idParticipant, $pseudo);
             Auth::logout();
             session()->invalidate();
             session()->regenerateToken();
@@ -464,6 +472,27 @@ class participantController extends Controller
 
         array_push($arrayControles, ['bool' => true, 'message' => ""]);
             return $arrayControles;
+    }
+
+    public function deleteUser($idParticipant, $pseudo)
+    {
+        try {
+            DB::table('participants')
+            ->where('id', '=', $idParticipant)
+            ->delete();
+        } catch(Exception) {
+            return redirect()->back()
+                ->with('error', 'Problème de suppression de '.$pseudo.' dans la table "Participants" !');
+        }
+
+        try {
+            DB::table('users')
+            ->where('pseudo', '=', $pseudo)
+            ->delete();
+        } catch(Exception) {
+            return redirect()->back()
+                ->with('error', 'Problème de suppression de '.$pseudo.' dans la table "Users" !');
+        }
     }
 }
 
