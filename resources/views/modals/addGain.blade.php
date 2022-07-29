@@ -39,7 +39,7 @@
                                     class="form-control flex-fill"
                                     name="inputDate"
                                     id="floatingDate"
-                                    value="{{ date('d/m/Y') }}"
+                                    value="<?php echo (new DateTime())->format('Y-m-d'); ?>"
                                     placeholder="gain"
                                     required
                                 />
