@@ -27,12 +27,14 @@ class logController extends Controller
         $arrayGainByGroup = $this->gains($groups);
         $groupsDispo = $this->groupsDisponible();
 
-        return view('pages.log', [
+        return view('pages.log', 
+            [
             'participants' => $participants, 
             'fonds' => $arrayFondsByGroup, 
             'sommeGainsByGroups' => $arrayGainByGroup,
             'groupsDispo' => $groupsDispo,
-            'groups' => $groups]);
+            'groups' => $groups]
+        );
     }
 
     public function register_action(Request $request) 

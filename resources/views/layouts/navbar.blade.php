@@ -92,7 +92,13 @@
                                             @foreach ( $fonds as $fond )
                                                 <tr>
                                                     <td><h3 class="me-3 fw-bold">{{ $fond['nameGroup'] }}</h3></td>
-                                                    <td class="text-end"><h3 class="text-info fw-bold"> {{ $fond['fonds'] }} €</h3></td>
+                                                    <td class="text-end"><h3 class="text-info fw-bold">
+                                                        @if ( $fond['fonds'] < 0)
+                                                            <p class="text-danger mb-0"> {{ $fond['fonds'] }} €</p>
+                                                        @else
+                                                            <p class="mb-0"> {{ $fond['fonds'] }} €</p>
+                                                        @endif
+                                                    </h3></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
