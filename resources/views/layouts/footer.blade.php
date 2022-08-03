@@ -23,6 +23,9 @@
                 <a class="text-decoration-none" href="https://laravel.com/docs/8.x"><i class="fa-brands fa-laravel me-4">
                         Laravel</i>
                 </a>
+                <a class="text-decoration-none" href="{{ route('rgbd') }}"><i class="fa-brands fa-laravel me-4">
+                    RGBD</i>
+            </a>
             </div>
         </div>
     </div>

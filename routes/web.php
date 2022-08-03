@@ -29,6 +29,7 @@ Route::get('participantDelete/{idParticipant}', [participantController::class, '
 Route::post('updateParticipant/{idParticipant}', [participantController::class, 'updateParticipant'])->name('updateParticipant');
 Route::post('changeGroup/{idParticipant}', [participantController::class, 'changeGroup'])->name('changeGroup');
 Route::get('searchParticipant', [participantController::class, 'searchParticipant'])->name('searchParticipant');
+Route::get('rgbd', [participantController::class, 'rgbd'])->name('rgbd');
 
 Route::post('addMoney/{idParticipant}', [moneyController::class, 'addMoney'])->name('addMoney');
 Route::post('debitMoney/{idParticipant}', [moneyController::class, 'debitMoney'])->name('debitMoney');

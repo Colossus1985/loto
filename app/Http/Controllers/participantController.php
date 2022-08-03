@@ -262,8 +262,7 @@ class participantController extends Controller
         $arrayGainByGroup = $this->gains($groups);
         $groupsDispo = $this->groupsDisponible();
 
-        return view('pages.participant', 
-            ['participant' => $participant, 
+        return view('pages.participant', [
             'actions' => $money, 
             'participants' => $participants,
             'fonds' => $arrayFondsByGroup,
@@ -330,6 +329,27 @@ class participantController extends Controller
         return redirect()->back()
             ->with('success', 'Modification de groupe a été enregistrée avec succès !');
     }
+
+    public function rgbd() 
+    {
+        $participants = Participants::query()
+            ->get();
+
+        $groups = Groups::query()
+            ->get();
+
+        $arrayFondsByGroup = $this->fonds($groups);
+        $arrayGainByGroup = $this->gains($groups);
+        $groupsDispo = $this->groupsDisponible();
+
+        return view('pages.rgbd', [ 
+            'participants' => $participants, 
+            'fonds' => $arrayFondsByGroup, 
+            'groupsDispo' => $groupsDispo,
+            'sommeGainsByGroups' => $arrayGainByGroup,
+            'groups' => $groups]);
+    }
+    
 
 //####################################################################################################
 
