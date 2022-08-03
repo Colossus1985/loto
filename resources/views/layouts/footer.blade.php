@@ -25,7 +25,7 @@
                 </a>
                 <br>
                 <a class="text-decoration-none text-white" href="{{ route('rgbd') }}">
-                    RGBD</i>
+                    RGPD</i>
             </a>
             </div>
         </div>
