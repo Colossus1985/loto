@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('content')
     <div class="px-5">
-        <h2>RGBD Traitement de données personnelles</h2>
+        <h2>RGPD Traitement de données personnelles</h2>
         <h4>1 – Conformité au RGPD</h4>
         <p>
             Pour tout traitement de données personnelles effectué en relation avec le présent 
