@@ -24,7 +24,7 @@
                         Laravel</i>
                 </a>
                 <br>
-                <a class="text-decoration-none text-white" href="{{ route('rgbd') }}">
+                <a class="text-decoration-none text-white" href="{{ route('rgpd') }}">
                     RGPD</i>
             </a>
             </div>
