@@ -241,13 +241,14 @@ class participantController extends Controller
     
     public function participant($idParticipant)
     {
+        // dd($idParticipant);
         $participants = Participants::query()
             ->get();
 
         $participant = Participants::query()
             ->where('id', '=', $idParticipant)
             ->get();
-            // dd($participant);
+        // dd($participant);
         // dd($participant[0]->nameGroup);
         $id_pseudo = $participant[0]->id;
         $money = Money::query()
@@ -265,6 +266,7 @@ class participantController extends Controller
         return view('pages.participant', [
             'actions' => $money, 
             'participants' => $participants,
+            'participant' => $participant,
             'fonds' => $arrayFondsByGroup,
             'groupsDispo' => $groupsDispo,
             'sommeGainsByGroups' => $arrayGainByGroup,
