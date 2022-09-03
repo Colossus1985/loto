@@ -202,7 +202,7 @@
                         <td class="text-end fw-bold">{{ number_format($action->creditGain, 2) }} €</td>
                     @endif
 
-                    <td class="fw-bold text-center">{{ $action->created_at }}</td>
+                    <td class="fw-bold text-center">{{ $action->date }}</td>
                 </tr>
             @endforeach
         </table>

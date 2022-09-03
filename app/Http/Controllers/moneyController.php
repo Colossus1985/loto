@@ -76,6 +76,7 @@ class moneyController extends Controller
         $action = new Money();
         $action->pseudo = $pseudo;
         $action->id_pseudo = $idParticipant;
+        $action->date = $request->inputDate;
         $action->amount = number_format($amount, 2);
         $action->debit = number_format($debit, 2);
         $action->save();

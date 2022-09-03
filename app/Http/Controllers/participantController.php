@@ -79,7 +79,7 @@ class participantController extends Controller
         $email = $request->inputEmail;
         $password = $request->inputPassword;
 
-//###---controle if pseudo or mail are already in use---###############################################
+        //###---controle if pseudo or mail are already in use---###############################################
         if ($email == null || $email == "") {
             $participantExist = Participants::query()
                 ->where('pseudo', '=', $pseudo)
@@ -100,7 +100,7 @@ class participantController extends Controller
             }
         }
 
-//###---Add participant in UsersTable---###############################################
+        //###---Add participant in UsersTable---###############################################
         $user = new User();
         $user->firstName = $request->inputFirstName;  
         $user->lastName = $request->inputLastName; 
@@ -110,7 +110,7 @@ class participantController extends Controller
         $user->password = Hash::make($password);
         $user->save();
 
-//###---Add participant in ParticipantsTable---###############################################
+        //###---Add participant in ParticipantsTable---###############################################
         $participant = new Participants();
         $participant->firstName = $request->inputFirstName;
         $participant->lastName = $request->inputLastName;
@@ -120,7 +120,7 @@ class participantController extends Controller
         $participant->tel = $request->inputTel;
         $participant->save();
 
-//###---Add participant in moneyTable---###############################################
+        //###---Add participant in moneyTable---###############################################
         $participant = Participants::query()
             ->where('pseudo', '=', $pseudo)
             ->get();
@@ -253,8 +253,8 @@ class participantController extends Controller
         $id_pseudo = $participant[0]->id;
         $money = Money::query()
             ->where('id_pseudo', '=', $id_pseudo)
-            ->orderBy('id', 'desc')
-            ->paginate(4);
+            ->orderBy('date', 'desc')
+            ->paginate(15);
 
         $groups = Groups::query()
             ->get();
@@ -495,7 +495,7 @@ class participantController extends Controller
         
         
 
-//###---If all is alright sending back 'true' with empty message---###
+        //###---If all is alright sending back 'true' with empty message---###
 
         array_push($arrayControles, ['bool' => true, 'message' => ""]);
             return $arrayControles;
