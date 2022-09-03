@@ -12,6 +12,7 @@ class gainController extends Controller
 {
     public function addGain(Request $request)
     {
+        // dd($request->inputDate);
         $nameGroup = $request->inputNameGroup;
         if (!$nameGroup || $nameGroup == '') {
             return redirect()->back()
@@ -63,6 +64,7 @@ class gainController extends Controller
                 $action = new Money();
                 $action->pseudo = $pseudo;
                 $action->id_pseudo = $idParticipant;
+                $action->date = $request->inputDate;
                 $action->amount = number_format($amount, 2);
                 $action->creditGain = number_format($credit, 2);
                 $action->save();
@@ -112,7 +114,6 @@ class gainController extends Controller
             array_push($arrayGainByGroup, ['nameGroup' => "pas de groupe", 'sommeGains' => 0]);
             $sommeGains = "";
         }
-// dd($groupsDispo);
         return view('pages.gains', [
             'gains' => $gains,
             'sommeGains' => $sommeGains,
@@ -123,7 +124,8 @@ class gainController extends Controller
             'sommeGainsByGroups' => $arrayGainByGroup]);
     } 
 
-    public function groupsDisponible() {
+    public function groupsDisponible() 
+    {
         $groupsDispo = Groups::join(
                 'participants', 'groups.id', '=', 'participants.id_group')
             ->select('groups.nameGroup')
