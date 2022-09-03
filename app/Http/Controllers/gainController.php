@@ -12,9 +12,12 @@ class gainController extends Controller
 {
     public function addGain(Request $request)
     {
-        
-        // $arrayParticipantWin = $request->inputParticipantWinArray;
         $nameGroup = $request->inputNameGroup;
+        if (!$nameGroup || $nameGroup == '') {
+            return redirect()->back()
+            ->with('error', 'indiquez le groupe gagniant, s\'il vous plait');
+        }
+
         $arrayParticipantWin = Participants::query()
             ->where('nameGroup', '=', $nameGroup)
             ->get();

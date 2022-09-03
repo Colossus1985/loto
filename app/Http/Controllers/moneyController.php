@@ -87,6 +87,10 @@ class moneyController extends Controller
     public function debitAll(Request $request)
     {
         $nameGroup = $request->inputNameGroup;
+        if (!$nameGroup || $nameGroup == '') {
+            return redirect()->back()
+            ->with('error', 'indiquez le groupe qui joue, s\'il vous plait');
+        }
 
         $arrayParticipant = Participants::query()
             ->where('nameGroup', '=', $nameGroup)
@@ -125,6 +129,7 @@ class moneyController extends Controller
             $action->id_pseudo = $idParticipant;
             $action->amount = number_format($amount, 2);
             $action->debit = number_format($debit, 2);
+            $action->date = $request->inputDate;
             $action->save();
         }
 

@@ -33,7 +33,21 @@
                                 />
                                 <label for="floatingMontant">Montant ➖ <span>€</span></label>
                             </div>
+                            <div class="form-group form-floating d-flex flex-fill">
+                                <input
+                                    type="date"
+                                    class="form-control flex-fill"
+                                    name="inputDate"
+                                    id="floatingDate"
+                                    value="<?php echo (new DateTime())->format('Y-m-d'); ?>"
+                                    placeholder="gain"
+                                    required
+                                />
+                                <label for="floatingDate">Date</label>
+                            </div>
                         </div>
+                        
+                        
                         <div class="border border-3 rounded-3 form-group form-floating mb-3 d-flex flex-fill flex-column">
                             <div class="">
                                 <p class="mt-1 mb-2 ps-3">Choisis le Group : </p>

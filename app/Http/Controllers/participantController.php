@@ -57,7 +57,7 @@ class participantController extends Controller
                 'groups' => $groups]);
         }
     }
-
+    
     public function addParticipant(Request $request)
     {
         $controle = $this->controlesInputs($request);
@@ -460,7 +460,7 @@ class participantController extends Controller
         
         if ($firstName != null || $firstName != '') {
             if (!preg_match($regexInputName, $firstName)) {
-                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux et chiffres dans le prenom!"]);
+                array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux et chiffres dans le prenoms!"]);
                 return $arrayControles;
             }
         }
@@ -487,7 +487,7 @@ class participantController extends Controller
         }
 
         if ($nameGroup != null || $nameGroup != '') {
-            if (!preg_match($regexInputName, $nameGroup)) {
+            if (!preg_match($regexInputPseudoPdw, $nameGroup)) {
                 array_push($arrayControles, ['bool' => false, 'message' => "Attention aux charactères spéciaux dans le nom du groupe!"]);
                 return $arrayControles;
             }
