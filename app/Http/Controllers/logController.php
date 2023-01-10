@@ -16,6 +16,7 @@ class logController extends Controller
 {
     public function logReg()
     {
+        // dd("icifdklhbqeihlgf");
         $participants = Participants::query()
             ->orderBy('nameGroup', 'asc')
             ->get();
